@@ -2,25 +2,17 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tito y los cambios de la cueva — Cuento Interactivo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Tito y los cambios de la cueva</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-primary: #1B4A38;
-      --color-primary-light: #2D6B53;
-      --color-accent-coral: #D95340;
-      --color-accent-ochre: #B4731E;
-      --color-bg-cream: #FAF7F0;
-      --color-card-bg: #FFFFFF;
-      --color-text-main: #26372B;
-      --color-text-muted: #6B7C70;
-      --color-border: rgba(215, 200, 170, 0.45);
-      --font-family: 'Quicksand', 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --shadow-soft: 0 12px 35px rgba(27, 74, 56, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
-      --shadow-lg: 0 20px 50px rgba(27, 74, 56, 0.14), 0 4px 12px rgba(0, 0, 0, 0.06);
+      --bg-color: #FAF7F0;
+      --primary: #1B4A38;
+      --accent: #B4731E;
+      --coral: #D95340;
     }
 
     * {
@@ -28,219 +20,101 @@
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
-    body {
-      background-color: var(--color-bg-cream);
-      color: var(--color-text-main);
-      font-family: var(--font-family);
-      min-height: 100vh;
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg-color);
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
-      user-select: none;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* Ambient soft background glow */
-    .ambient-glow {
+    /* Ambient soft background */
+    .ambient-bg {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at 15% 20%, rgba(220, 240, 230, 0.6) 0%, transparent 45%),
-                  radial-gradient(circle at 85% 80%, rgba(255, 238, 215, 0.6) 0%, transparent 45%);
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, rgba(250, 247, 240, 1) 100%);
       pointer-events: none;
       z-index: 0;
     }
 
-    /* Top Navigation & Audio Bar */
-    header.app-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(250, 247, 240, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--color-border);
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-    }
-
-    .header-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .header-logo {
-      width: 40px;
-      height: 40px;
-      background: #E8F3EE;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      border: 1px solid rgba(27, 74, 56, 0.15);
-    }
-
-    .header-titles h1 {
-      font-family: 'Nunito', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: var(--color-primary);
-      line-height: 1.2;
-    }
-
-    .header-titles p {
-      font-size: 0.78rem;
-      color: var(--color-text-muted);
-      font-weight: 600;
-    }
-
-    .header-controls {
+    /* Minimal floating top controls */
+    .top-bar {
+      position: fixed;
+      top: 14px;
+      right: 18px;
+      z-index: 50;
       display: flex;
       align-items: center;
       gap: 10px;
-      flex-wrap: wrap;
     }
 
-    /* Control Pills */
-    .ctrl-pill {
-      display: inline-flex;
+    .icon-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(215, 200, 170, 0.6);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+      display: flex;
       align-items: center;
-      gap: 7px;
-      background: #FFFFFF;
-      border: 1px solid var(--color-border);
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--color-primary);
+      justify-content: center;
+      font-size: 1.25rem;
       cursor: pointer;
+      color: var(--primary);
       transition: all 0.2s ease;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
     }
 
-    .ctrl-pill:hover {
-      background: #F3F8F5;
-      border-color: var(--color-primary-light);
-      transform: translateY(-1px);
-    }
-
-    .ctrl-pill.active {
-      background: var(--color-primary);
-      color: #FFFFFF;
-      border-color: var(--color-primary);
-    }
-
-    .ctrl-pill.pulse {
-      animation: gentle-pulse 2s infinite;
-    }
-
-    @keyframes gentle-pulse {
-      0% { box-shadow: 0 0 0 0 rgba(27, 74, 56, 0.4); }
-      70% { box-shadow: 0 0 0 8px rgba(27, 74, 56, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(27, 74, 56, 0); }
-    }
-
-    /* Music Player Pill */
-    .music-widget {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .icon-btn:hover {
+      transform: scale(1.08);
       background: #FFFFFF;
-      border: 1px solid var(--color-border);
-      border-radius: 20px;
-      padding: 4px 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      box-shadow: 0 6px 18px rgba(27, 74, 56, 0.15);
     }
 
-    .music-btn {
-      background: none;
-      border: none;
-      font-size: 1.05rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-primary);
-      padding: 2px;
-      transition: transform 0.15s ease;
+    .icon-btn.playing {
+      animation: music-spin 6s linear infinite;
     }
 
-    .music-btn:hover {
-      transform: scale(1.15);
+    @keyframes music-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
-    .music-label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--color-text-main);
-    }
-
-    .music-vol {
-      width: 65px;
-      accent-color: var(--color-primary);
-      cursor: pointer;
-    }
-
-    /* View Mode Container */
-    main.content-area {
+    /* Main Story Stage - Full viewport priority */
+    .book-stage {
       position: relative;
-      z-index: 1;
-      flex: 1;
+      z-index: 10;
+      width: 100vw;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 16px 20px 24px 20px;
-      max-width: 1600px;
-      margin: 0 auto;
-      width: 100%;
+      padding: 12px;
     }
 
-    /* =========================================
-       MODO PRESENTACIÓN (SLIDESHOW)
-       ========================================= */
-    #mode-presentation {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      justify-content: center;
-    }
-
-    .presentation-stage {
+    /* 16:9 Responsive Slide Canvas */
+    .slide-frame {
       position: relative;
-      width: 100%;
-      max-width: 1380px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    /* The exact 16:9 Slide Canvas Container */
-    .slide-viewport {
-      position: relative;
-      width: 100%;
+      width: min(96vw, calc(92vh * (16 / 9)));
+      height: min(calc(96vw * (9 / 16)), 88vh);
+      max-width: 1500px;
       aspect-ratio: 16 / 9;
-      max-height: calc(100vh - 210px);
-      max-width: calc((100vh - 210px) * (16 / 9));
       background: #FFFFFF;
       border-radius: 20px;
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--color-border);
+      box-shadow: 0 16px 45px rgba(27, 74, 56, 0.1), 0 2px 10px rgba(0, 0, 0, 0.04);
       overflow: hidden;
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .slide-viewport:hover {
-      box-shadow: 0 25px 60px rgba(27, 74, 56, 0.16);
+      border: 1px solid rgba(215, 200, 170, 0.45);
     }
 
     .slide-canvas {
@@ -257,423 +131,333 @@
     .slide-canvas.active {
       display: block;
       pointer-events: auto;
-      animation: fadeInSlide 0.2s ease-out;
+      animation: fadeIn 0.2s ease-out;
     }
 
-    @keyframes fadeInSlide {
+    @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
 
-    /* Navigation Arrows Floating on Sides */
+    /* Navigation Arrows */
     .nav-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 52px;
-      height: 52px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      background: #FFFFFF;
-      border: 1px solid var(--color-border);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(215, 200, 170, 0.7);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
-      color: var(--color-primary);
+      font-size: 1.6rem;
+      color: var(--primary);
       cursor: pointer;
-      z-index: 15;
+      z-index: 30;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .nav-arrow:hover:not(:disabled) {
-      background: var(--color-primary);
+      background: var(--primary);
       color: #FFFFFF;
-      transform: translateY(-50%) scale(1.12);
-      box-shadow: 0 10px 25px rgba(27, 74, 56, 0.25);
+      transform: translateY(-50%) scale(1.1);
     }
 
     .nav-arrow:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
+      opacity: 0.15;
+      cursor: default;
       pointer-events: none;
     }
 
-    .nav-arrow.prev { left: -26px; }
-    .nav-arrow.next { right: -26px; }
+    .nav-arrow.prev { left: 16px; }
+    .nav-arrow.next { right: 16px; }
 
-    /* Interactive Audio Trigger Action Banner */
-    .interactive-sound-dock {
-      margin-top: 14px;
+    /* Minimal floating Sound Action Button */
+    .sound-badge-dock {
+      position: absolute;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 40;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      z-index: 10;
+      pointer-events: none;
     }
 
-    .sound-trigger-btn {
+    .sound-badge {
+      pointer-events: auto;
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: linear-gradient(135deg, #FFF9F0 0%, #FFFFFF 100%);
-      border: 2px solid var(--color-accent-ochre);
-      color: #7A4B00;
-      font-family: 'Nunito', sans-serif;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 2px solid var(--accent);
+      color: #633C02;
       font-size: 1.05rem;
       font-weight: 800;
-      padding: 10px 22px;
+      padding: 10px 24px;
       border-radius: 30px;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(180, 115, 30, 0.15);
+      box-shadow: 0 8px 24px rgba(180, 115, 30, 0.22);
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      animation: sound-pulse 2.2s infinite;
+      animation: sound-glow 2.2s infinite;
+      white-space: nowrap;
     }
 
-    .sound-trigger-btn:hover {
-      background: var(--color-accent-ochre);
+    .sound-badge:hover {
+      background: var(--accent);
       color: #FFFFFF;
-      transform: scale(1.05) translateY(-2px);
-      box-shadow: 0 8px 24px rgba(180, 115, 30, 0.3);
+      transform: scale(1.06);
     }
 
-    .sound-trigger-btn.btn-laughter {
+    .sound-badge.btn-laughter {
       border-color: #2E8B57;
-      color: #1A5734;
-      background: #F0FFF4;
-      box-shadow: 0 4px 15px rgba(46, 139, 87, 0.2);
+      color: #155734;
+      box-shadow: 0 8px 24px rgba(46, 139, 87, 0.25);
     }
-    .sound-trigger-btn.btn-laughter:hover {
+    .sound-badge.btn-laughter:hover {
       background: #2E8B57;
       color: #FFF;
     }
 
-    .sound-trigger-btn.btn-door {
-      border-color: #D95340;
-      color: #9E2413;
-      background: #FFF5F4;
-      box-shadow: 0 4px 15px rgba(217, 83, 64, 0.2);
+    .sound-badge.btn-door {
+      border-color: var(--coral);
+      color: #932214;
+      box-shadow: 0 8px 24px rgba(217, 83, 64, 0.25);
     }
-    .sound-trigger-btn.btn-door:hover {
-      background: #D95340;
+    .sound-badge.btn-door:hover {
+      background: var(--coral);
       color: #FFF;
     }
 
-    .sound-trigger-btn.btn-heart {
+    .sound-badge.btn-heart {
       border-color: #C2185B;
       color: #880E4F;
-      background: #FDF2F8;
-      box-shadow: 0 4px 15px rgba(194, 24, 91, 0.2);
+      box-shadow: 0 8px 24px rgba(194, 24, 91, 0.25);
     }
-    .sound-trigger-btn.btn-heart:hover {
+    .sound-badge.btn-heart:hover {
       background: #C2185B;
       color: #FFF;
     }
 
-    .sound-trigger-btn.btn-calm {
+    .sound-badge.btn-calm {
       border-color: #0288D1;
       color: #01579B;
-      background: #F0F9FF;
-      box-shadow: 0 4px 15px rgba(2, 136, 209, 0.2);
+      box-shadow: 0 8px 24px rgba(2, 136, 209, 0.25);
     }
-    .sound-trigger-btn.btn-calm:hover {
+    .sound-badge.btn-calm:hover {
       background: #0288D1;
       color: #FFF;
     }
 
-    @keyframes sound-pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.03); }
-      100% { transform: scale(1); }
+    @keyframes sound-glow {
+      0% { transform: scale(1); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+      50% { transform: scale(1.04); box-shadow: 0 8px 28px rgba(0,0,0,0.22); }
+      100% { transform: scale(1); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
     }
 
-    /* Sound Effect Waves / Ripple Effect */
+    /* Minimal Bottom Dots (Subtle) */
+    .minimal-dots {
+      position: fixed;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      z-index: 30;
+      padding: 4px 12px;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(6px);
+      border-radius: 20px;
+      border: 1px solid rgba(215, 200, 170, 0.4);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(27, 74, 56, 0.25);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .dot.active {
+      width: 22px;
+      border-radius: 10px;
+      background: var(--primary);
+    }
+
+    /* Initial Tap-to-Start Banner (Ensures 100% Mobile Browser Autoplay) */
+    .start-prompt {
+      position: fixed;
+      inset: 0;
+      background: rgba(250, 247, 240, 0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      cursor: pointer;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .start-prompt.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .start-card {
+      background: #FFFFFF;
+      padding: 32px 38px;
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(27, 74, 56, 0.14);
+      border: 1px solid rgba(215, 200, 170, 0.6);
+      text-align: center;
+      max-width: 380px;
+      animation: pulse-start 2s infinite ease-in-out;
+    }
+
+    .start-card .bear-icon {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .start-card h2 {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .start-card p {
+      font-size: 0.95rem;
+      color: #556B5D;
+      line-height: 1.4;
+      margin-bottom: 18px;
+    }
+
+    .start-btn {
+      background: var(--primary);
+      color: #FFFFFF;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 12px 28px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 6px 18px rgba(27, 74, 56, 0.3);
+    }
+
+    @keyframes pulse-start {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.025); }
+    }
+
+    /* Sound Wave Ripple Effect */
     .sound-ripple {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 200px;
-      height: 200px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
-      border: 4px solid var(--color-accent-coral);
+      border: 4px solid var(--accent);
       opacity: 0;
       pointer-events: none;
-      z-index: 999;
+      z-index: 99;
     }
 
     .sound-ripple.animate {
-      animation: ripple-out 0.8s ease-out forwards;
+      animation: rippleEffect 0.7s ease-out forwards;
     }
 
-    @keyframes ripple-out {
-      0% { transform: translate(-50%, -50%) scale(0.4); opacity: 0.9; }
-      100% { transform: translate(-50%, -50%) scale(2.8); opacity: 0; }
+    @keyframes rippleEffect {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.9; }
+      100% { transform: translate(-50%, -50%) scale(3.5); opacity: 0; }
     }
 
-    /* Bottom Pagination & Progress Dock */
-    footer.bottom-dock {
-      margin-top: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-      max-width: 1100px;
-    }
-
-    .progress-bar-container {
-      width: 100%;
-      max-width: 820px;
-      height: 6px;
-      background: rgba(215, 200, 170, 0.35);
-      border-radius: 3px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--color-primary-light), var(--color-accent-ochre));
-      border-radius: 3px;
-      transition: width 0.35s ease;
-      width: 10%;
-    }
-
-    .page-dots-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      flex-wrap: wrap;
-      max-width: 100%;
-    }
-
-    .page-dot {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px 10px;
-      border-radius: 14px;
-      background: #FFFFFF;
-      border: 1px solid var(--color-border);
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--color-text-muted);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-    }
-
-    .page-dot:hover {
-      background: #F3F8F5;
-      color: var(--color-primary);
-      border-color: var(--color-primary-light);
-    }
-
-    .page-dot.active {
-      background: var(--color-primary);
-      color: #FFFFFF;
-      border-color: var(--color-primary);
-      box-shadow: 0 3px 10px rgba(27, 74, 56, 0.25);
-    }
-
-    .page-indicator-text {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--color-primary);
-    }
-
-    /* =========================================
-       MODO CONTINUO (VERTICAL SCROLL)
-       ========================================= */
-    #mode-continuous {
-      display: none;
-      flex-direction: column;
-      gap: 36px;
-      width: 100%;
-      max-width: 1200px;
-      align-items: center;
-    }
-
-    .continuous-card {
-      width: 100%;
-      background: #FFFFFF;
-      border-radius: 20px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--color-border);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .continuous-card:hover {
-      box-shadow: var(--shadow-lg);
-    }
-
-    .continuous-header {
-      padding: 12px 20px;
-      background: #F9F6EE;
-      border-bottom: 1px solid var(--color-border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .continuous-header span.tag {
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: var(--color-accent-ochre);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .continuous-img {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      object-fit: contain;
-      background: #FFFFFF;
-      display: block;
-    }
-
-    .continuous-footer {
-      padding: 14px 20px;
-      background: #FFFFFF;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    /* Fullscreen Mode Styles */
-    :fullscreen body, :-webkit-full-screen body {
-      background-color: #121815;
-    }
-    :fullscreen .slide-viewport, :-webkit-full-screen .slide-viewport {
-      max-height: calc(100vh - 160px);
-      max-width: calc((100vh - 160px) * (16 / 9));
-      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-    }
-    :fullscreen header.app-header, :-webkit-full-screen header.app-header {
-      background: rgba(18, 24, 21, 0.9);
-      border-bottom-color: rgba(255,255,255,0.1);
-      color: #FFFFFF;
-    }
-    :fullscreen .header-titles h1, :-webkit-full-screen .header-titles h1 {
-      color: #E8F3EE;
-    }
-    :fullscreen .page-dot, :-webkit-full-screen .page-dot {
-      background: #1E2822;
-      border-color: rgba(255,255,255,0.15);
-      color: #A0B5A8;
-    }
-    :fullscreen .page-indicator-text, :-webkit-full-screen .page-indicator-text {
-      color: #E8F3EE;
-    }
-
-    /* Responsive adjustments for Tablets & Phones */
-    @media (max-width: 900px) {
-      header.app-header {
-        padding: 6px 10px;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
+    /* Mobile Adaptations */
+    @media (max-width: 768px) {
+      .book-stage {
+        padding: 6px;
       }
-      header.app-header::-webkit-scrollbar {
-        display: none;
+      .slide-frame {
+        width: 98vw;
+        height: min(calc(98vw * (9 / 16)), 80vh);
+        border-radius: 14px;
       }
-      .header-titles h1 {
-        font-size: 0.95rem;
-        white-space: nowrap;
-      }
-      .header-titles p {
-        display: none;
-      }
-      .header-controls {
-        flex-shrink: 0;
-        flex-wrap: nowrap;
-      }
-      .music-widget {
-        padding: 2px 8px;
-      }
-      .music-label {
-        display: none;
-      }
-      .music-vol {
-        display: none;
-      }
-      .ctrl-pill {
-        padding: 5px 10px;
-        font-size: 0.78rem;
-        white-space: nowrap;
-      }
-      .nav-arrow.prev { left: 6px; }
-      .nav-arrow.next { right: 6px; }
       .nav-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(4px);
+        width: 42px;
+        height: 42px;
+        font-size: 1.3rem;
       }
-      .sound-trigger-btn {
+      .nav-arrow.prev { left: 8px; }
+      .nav-arrow.next { right: 8px; }
+      .sound-badge {
         font-size: 0.88rem;
-        padding: 8px 16px;
-        width: 100%;
-        max-width: 340px;
-        justify-content: center;
-        text-align: center;
+        padding: 8px 18px;
       }
-      .page-dot span.label {
-        display: none;
+      .sound-badge-dock {
+        bottom: 16px;
       }
-      .page-dot {
-        padding: 4px 8px;
-        min-width: 28px;
-        justify-content: center;
+      .top-bar {
+        top: 10px;
+        right: 12px;
       }
-      main.content-area {
-        padding: 10px 10px 16px 10px;
+      .icon-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
       }
     }
 
-    /* Mobile Landscape Optimization (sideways phone) */
-    @media (max-height: 520px) {
-      header.app-header {
-        padding: 3px 8px;
+    /* Landscape Mode for Phone (Maximized Experience) */
+    @media (max-height: 500px) {
+      .slide-frame {
+        width: calc(94vh * (16 / 9));
+        height: 94vh;
+        border-radius: 12px;
       }
-      .header-logo {
-        width: 26px;
-        height: 26px;
-        font-size: 0.95rem;
+      .sound-badge-dock {
+        bottom: 8px;
       }
-      .header-titles h1 {
-        font-size: 0.85rem;
+      .sound-badge {
+        font-size: 0.78rem;
+        padding: 5px 14px;
       }
-      #btn-autoplay, #btn-mode-continuous {
-        display: none;
-      }
-      .slide-viewport {
-        max-height: calc(100vh - 100px);
-        max-width: calc((100vh - 100px) * (16 / 9));
-      }
-      .interactive-sound-dock {
-        margin-top: 4px;
-      }
-      .sound-trigger-btn {
-        padding: 4px 14px;
-        font-size: 0.8rem;
-      }
-      footer.bottom-dock {
-        display: none;
+      .minimal-dots {
+        bottom: 4px;
       }
       .nav-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+      }
+      .top-bar {
+        top: 6px;
+        right: 8px;
+      }
+      .icon-btn {
         width: 34px;
         height: 34px;
-        font-size: 0.9rem;
+        font-size: 1rem;
       }
     }
   </style>
@@ -681,10 +465,20 @@
 <body>
 
   <!-- Ambient Glow Background -->
-  <div class="ambient-glow"></div>
+  <div class="ambient-bg"></div>
 
   <!-- Ripple Sound Effect Ring -->
   <div id="sound-ripple" class="sound-ripple"></div>
+
+  <!-- Minimal Floating Audio & Fullscreen Buttons -->
+  <div class="top-bar">
+    <button id="btn-music" class="icon-btn" title="Música de Cuna (Activar/Silenciar)">
+      🎵
+    </button>
+    <button id="btn-fullscreen" class="icon-btn" title="Pantalla Completa">
+      ⛶
+    </button>
+  </div>
 
   <!-- Audio Elements -->
   <audio id="audio-bgm" loop preload="auto">
@@ -700,361 +494,164 @@
     <source src="assets/audio/sonido_corazon_pum_pum.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- App Header -->
-  <header class="app-header">
-    <div class="header-brand">
-      <div class="header-logo">🐻</div>
-      <div class="header-titles">
-        <h1>Tito y los cambios de la cueva</h1>
-        <p>Cuentos para sentir • 0 a 3 años</p>
-      </div>
+  <!-- Initial Tap to Start Overlay (Unlocks Browser Audio Engine smoothly) -->
+  <div id="start-overlay" class="start-prompt">
+    <div class="start-card">
+      <span class="bear-icon">🐻</span>
+      <h2>Tito y los cambios de la cueva</h2>
+      <p>Cuentos para sentir • 0 a 3 años<br>Toca para abrir el cuento con música suave y sonidos.</p>
+      <button class="start-btn">✨ Abrir Cuento ✨</button>
+    </div>
+  </div>
+
+  <!-- Main Story Stage -->
+  <main class="book-stage">
+
+    <!-- Left Navigation Arrow -->
+    <button id="btn-prev" class="nav-arrow prev" title="Anterior" disabled>‹</button>
+
+    <!-- Slide Canvas Frame -->
+    <div id="slide-viewport" class="slide-frame" title="Toca para avanzar">
+      <img id="slide-1" class="slide-canvas active" src="assets/images/slide_01.png" alt="1. Portada">
+      <img id="slide-2" class="slide-canvas" src="assets/images/slide_02.png" alt="2. La cueva grande">
+      <img id="slide-3" class="slide-canvas" src="assets/images/slide_03.png" alt="3. Mañana tibia">
+      <img id="slide-4" class="slide-canvas" src="assets/images/slide_04.png" alt="4. Tito ríe">
+      <img id="slide-5" class="slide-canvas" src="assets/images/slide_05.png" alt="5. El portazo">
+      <img id="slide-6" class="slide-canvas" src="assets/images/slide_06.png" alt="6. El corazón asustado">
+      <img id="slide-7" class="slide-canvas" src="assets/images/slide_07.png" alt="7. Mamá abraza">
+      <img id="slide-8" class="slide-canvas" src="assets/images/slide_08.png" alt="8. Tristeza en la pancita">
+      <img id="slide-9" class="slide-canvas" src="assets/images/slide_09.png" alt="9. Osa Rosa acompaña">
+      <img id="slide-10" class="slide-canvas" src="assets/images/slide_10.png" alt="10. Todo está bien">
     </div>
 
-    <div class="header-controls">
-      <!-- Music Player Widget -->
-      <div class="music-widget">
-        <button id="btn-toggle-music" class="music-btn" title="Reproducir / Pausar Música de Fondo">
-          ▶️
-        </button>
-        <span class="music-label">Música de cuna</span>
-        <input type="range" id="vol-music" class="music-vol" min="0" max="1" step="0.05" value="0.35" title="Volumen">
-      </div>
+    <!-- Right Navigation Arrow -->
+    <button id="btn-next" class="nav-arrow next" title="Siguiente">›</button>
 
-      <!-- View Mode Switcher -->
-      <button id="btn-mode-slides" class="ctrl-pill active" title="Modo Diapositivas">
-        📖 Presentación
-      </button>
-      <button id="btn-mode-continuous" class="ctrl-pill" title="Modo Continuo (Desplazamiento)">
-        📜 Vista Continua
-      </button>
+    <!-- Contextual Sound Badge Dock (Minimal floating action per slide) -->
+    <div id="sound-dock" class="sound-badge-dock"></div>
 
-      <!-- Auto Play Toggle -->
-      <button id="btn-autoplay" class="ctrl-pill" title="Avanzar automáticamente cada 10 segundos">
-        ⏱️ Auto-Lectura
-      </button>
-
-      <!-- Fullscreen Toggle -->
-      <button id="btn-fullscreen" class="ctrl-pill" title="Pantalla Completa">
-        ⛶ Pantalla Completa
-      </button>
-    </div>
-  </header>
-
-  <!-- Main Content Stage -->
-  <main class="content-area">
-
-    <!-- ==========================================
-         VIEW MODE 1: PRESENTATION (SLIDE BY SLIDE)
-         ========================================== -->
-    <div id="mode-presentation">
-      <div class="presentation-stage">
-        
-        <!-- Previous Arrow -->
-        <button id="btn-prev" class="nav-arrow prev" title="Página Anterior (Flecha Izquierda)" disabled>
-          ◀
-        </button>
-
-        <!-- Slide Viewport (Exactly 16:9 Aspect Ratio) -->
-        <div id="slide-viewport" class="slide-viewport" title="Haz clic para avanzar de página">
-          <img id="slide-img-1" class="slide-canvas active" src="assets/images/slide_01.png" alt="Página 1: Tito y los cambios de la cueva">
-          <img id="slide-img-2" class="slide-canvas" src="assets/images/slide_02.png" alt="Página 2: La cueva grande de Tito">
-          <img id="slide-img-3" class="slide-canvas" src="assets/images/slide_03.png" alt="Página 3: Una mañana tibia">
-          <img id="slide-img-4" class="slide-canvas" src="assets/images/slide_04.png" alt="Página 4: Tito ríe: ji, ji, ji">
-          <img id="slide-img-5" class="slide-canvas" src="assets/images/slide_05.png" alt="Página 5: El sonido inesperado: CLANC, CLANC">
-          <img id="slide-img-6" class="slide-canvas" src="assets/images/slide_06.png" alt="Página 6: El corazón asustado: PUM, PUM, PUM">
-          <img id="slide-img-7" class="slide-canvas" src="assets/images/slide_07.png" alt="Página 7: Mamá contiene el susto">
-          <img id="slide-img-8" class="slide-canvas" src="assets/images/slide_08.png" alt="Página 8: Lolo se despide">
-          <img id="slide-img-9" class="slide-canvas" src="assets/images/slide_09.png" alt="Página 9: Osa Rosa acompaña">
-          <img id="slide-img-10" class="slide-canvas" src="assets/images/slide_10.png" alt="Página 10: Todo está bien">
-        </div>
-
-        <!-- Next Arrow -->
-        <button id="btn-next" class="nav-arrow next" title="Página Siguiente (Flecha Derecha o Espacio)">
-          ▶
-        </button>
-
-      </div>
-
-      <!-- Interactive Sound Action Bar (Contextual per Slide) -->
-      <div id="interactive-sound-dock" class="interactive-sound-dock">
-        <!-- Dynamically injected based on current slide -->
-      </div>
-
-      <!-- Bottom Pagination & Progress Dock -->
-      <footer class="bottom-dock">
-        <div class="progress-bar-container">
-          <div id="progress-bar-fill" class="progress-bar-fill"></div>
-        </div>
-
-        <div class="page-dots-row">
-          <div class="page-dot active" data-page="1" title="1. Portada"><span class="num">1</span> <span class="label">Portada</span></div>
-          <div class="page-dot" data-page="2" title="2. La cueva grande"><span class="num">2</span> <span class="label">Cueva</span></div>
-          <div class="page-dot" data-page="3" title="3. Una mañana tibia"><span class="num">3</span> <span class="label">Luz</span></div>
-          <div class="page-dot" data-page="4" title="4. Tito ríe: ji, ji, ji"><span class="num">4</span> <span class="label">Alegría</span></div>
-          <div class="page-dot" data-page="5" title="5. El sonido inesperado: ¡CLANC!"><span class="num">5</span> <span class="label">¡CLANC!</span></div>
-          <div class="page-dot" data-page="6" title="6. El corazón asustado: ¡PUM!"><span class="num">6</span> <span class="label">Susto</span></div>
-          <div class="page-dot" data-page="7" title="7. Mamá contiene el susto"><span class="num">7</span> <span class="label">Abrazo</span></div>
-          <div class="page-dot" data-page="8" title="8. Tito siente tristeza"><span class="num">8</span> <span class="label">Tristeza</span></div>
-          <div class="page-dot" data-page="9" title="9. Osa Rosa acompaña"><span class="num">9</span> <span class="label">Compañía</span></div>
-          <div class="page-dot" data-page="10" title="10. Todo está bien"><span class="num">10</span> <span class="label">Calma</span></div>
-        </div>
-
-        <div id="page-counter" class="page-indicator-text">
-          Página 1 de 10
-        </div>
-      </footer>
-    </div>
-
-    <!-- ==========================================
-         VIEW MODE 2: CONTINUOUS SCROLL
-         ========================================== -->
-    <div id="mode-continuous">
-      <!-- 10 Beautiful Cards for continuous read -->
-      <div class="continuous-card" id="card-1">
-        <div class="continuous-header">
-          <span class="tag">Página 1 • Portada</span>
-          <span style="font-size:0.85rem; font-weight:700; color:var(--color-primary);">Tito y los cambios de la cueva</span>
-        </div>
-        <img class="continuous-img" src="assets/images/slide_01.png" alt="Página 1: Tito y los cambios de la cueva" loading="lazy">
-        <div class="continuous-footer">
-          <button class="sound-trigger-btn" onclick="playCalmChime()">✨ Iniciar lectura con dulzura</button>
-        </div>
-      </div>
-
-      <div class="continuous-card" id="card-2">
-        <div class="continuous-header">
-          <span class="tag">Página 2</span>
-          <span style="font-size:0.85rem; font-weight:700; color:var(--color-primary);">La cueva grande de Tito</span>
-        </div>
-        <img class="continuous-img" src="assets/images/slide_02.png" alt="Página 2: La cueva grande de Tito" loading="lazy">
-        <div class="continuous-footer">
-          <button class="sound-trigger-btn" onclick="playSoftTone()">🍃 La cueva segura</button>
-        </div>
-      </div>
-
-      <div class="continuous-card" id="card-3">
-        <div class="continuous-header">
-          <span class="tag">Página 3</span>
-          <span style="font-size:0.85rem; font-weight:700; color:var(--color-primary);">Una mañana tibia</span>
-        </div>
-        <img class="continuous-img" src="assets/images/slide_03.png" alt="Página 3: Una mañana tibia" loading="lazy">
-        <div class="continuous-footer">
-          <button class="sound-trigger-btn" onclick="playLullabySing()">🎵 Canción bajita de Mamá</button>
-        </div>
-      </div>
-
-      <div class="continuous-card" id="card-4">
-        <div class="continuous-header">
-          <span class="tag">Página 4 • Alegría</span>
-          <span style="font-size:0.85rem; font-weight:700; color:var(--color-primary);">Tito sonríe: «¡ji, ji, ji!»</span>
-        </div>
-        <img class="continuous-img" src="assets/images/slide_04.png" alt="Página 4: Tito ríe" loading="lazy">
-        <div class="continuous-footer">
-          <button class="sound-trigger-btn btn-laughter" onclick="playAudio('audio-laughter')">😄 🔊 ¡Escuchar risita de Tito! («¡ji, ji, ji!»)</button>
-        </div>
-      </div>
-
-      <div class="continuous-card" id="card-5">
-        <div class="continuous-header">
-          <span class="tag">Página 5 • Susto</span>
-          <span style="font-size:0.85rem; font-weight:700; color:var(--color-primary);">El sonido inesperado: «¡CLANC, CLANC!»</span>
-        </div>
-        <img class="continuous-img" src="assets/images/slide_05.png" alt="Página 5: Sonido inesperado" loading="lazy">
-        <div class="continuous-footer">
-          <button class="sound-trigger-btn btn-door" onclick="playAudio('audio-door')">🚪 🔊 ¡Escuchar portazo! («¡CLANC, CLANC!»)</button>
-        </div>
-      </div>
-
-      <div class="continuous-card" id="card-6">
-        <div class="continuous-header">
-          <span class="tag">Página 6 • Susto</span>
-          <span style="font-size:0.85rem; font-weight:700; color:var(--color-primary);">El corazón asustado: «¡PUM, PUM, PUM!»</span>
-        </div>
-        <img class="continuous-img" src="assets/images/slide_06.png" alt="Página 6: El corazón asustado" loading="lazy">
-        <div class="continuous-footer">
-          <button class="sound-trigger-btn btn-heart" onclick="playAudio('audio-heart')">💓 🔊 ¡Escuchar latidos rápidos! («¡PUM, PUM, PUM!»)</button>
-        </div>
-      </div>
-
-      <div class="continuous-card" id="card-7">
-        <div class="continuous-header">
-          <span class="tag">Página 7 • Contención</span>
-          <span style="font-size:0.85rem; font-weight:700; color:var(--color-primary);">Mamá abraza a Tito («Aquí estoy»)</span>
-        </div>
-        <img class="continuous-img" src="assets/images/slide_07.png" alt="Página 7: Mamá abraza a Tito" loading="lazy">
-        <div class="continuous-footer">
-          <button class="sound-trigger-btn btn-calm" onclick="playSlowHeartbeat()">🤱 🔊 Abrazo y calma lenta («Aquí estoy»)</button>
-        </div>
-      </div>
-
-      <div class="continuous-card" id="card-8">
-        <div class="continuous-header">
-          <span class="tag">Página 8 • Tristeza</span>
-          <span style="font-size:0.85rem; font-weight:700; color:var(--color-primary);">Lolo se despide: Tito siente tristeza</span>
-        </div>
-        <img class="continuous-img" src="assets/images/slide_08.png" alt="Página 8: Lolo se despide" loading="lazy">
-        <div class="continuous-footer">
-          <button class="sound-trigger-btn" onclick="playSadnessBreathe()">🍃 🔊 Sentir la pancita (Tristeza suave)</button>
-        </div>
-      </div>
-
-      <div class="continuous-card" id="card-9">
-        <div class="continuous-header">
-          <span class="tag">Página 9 • Compañía</span>
-          <span style="font-size:0.85rem; font-weight:700; color:var(--color-primary);">Osa Rosa acompaña: «Yo estoy contigo»</span>
-        </div>
-        <img class="continuous-img" src="assets/images/slide_09.png" alt="Página 9: Osa Rosa acompaña" loading="lazy">
-        <div class="continuous-footer">
-          <button class="sound-trigger-btn btn-calm" onclick="playCalmChime()">✨ 🔊 Acompañar con amor («Yo estoy contigo»)</button>
-        </div>
-      </div>
-
-      <div class="continuous-card" id="card-10">
-        <div class="continuous-header">
-          <span class="tag">Página 10 • Calma</span>
-          <span style="font-size:0.85rem; font-weight:700; color:var(--color-primary);">Cierre: «Y todo está bien»</span>
-        </div>
-        <img class="continuous-img" src="assets/images/slide_10.png" alt="Página 10: Todo está bien" loading="lazy">
-        <div class="continuous-footer">
-          <button class="sound-trigger-btn btn-laughter" onclick="playCelebration()">⭐ 🔊 Celebrar las emociones («Y todo está bien»)</button>
-        </div>
-      </div>
+    <!-- Minimal Dots Indicator -->
+    <div class="minimal-dots" id="dots-container">
+      <div class="dot active" data-page="1"></div>
+      <div class="dot" data-page="2"></div>
+      <div class="dot" data-page="3"></div>
+      <div class="dot" data-page="4"></div>
+      <div class="dot" data-page="5"></div>
+      <div class="dot" data-page="6"></div>
+      <div class="dot" data-page="7"></div>
+      <div class="dot" data-page="8"></div>
+      <div class="dot" data-page="9"></div>
+      <div class="dot" data-page="10"></div>
     </div>
 
   </main>
 
   <script>
-    // State management
     let currentPage = 1;
     const totalPages = 10;
-    let isAutoPlaying = false;
-    let autoPlayTimer = null;
+    let isMusicPlaying = false;
+    let audioCtx = null;
 
-    // DOM Elements
+    // DOM References
     const audioBgm = document.getElementById('audio-bgm');
-    const btnToggleMusic = document.getElementById('btn-toggle-music');
-    const volMusic = document.getElementById('vol-music');
+    const audioLaughter = document.getElementById('audio-laughter');
+    const audioDoor = document.getElementById('audio-door');
+    const audioHeart = document.getElementById('audio-heart');
+    const btnMusic = document.getElementById('btn-music');
+    const btnFullscreen = document.getElementById('btn-fullscreen');
     const btnPrev = document.getElementById('btn-prev');
     const btnNext = document.getElementById('btn-next');
-    const progressBarFill = document.getElementById('progress-bar-fill');
-    const pageCounter = document.getElementById('page-counter');
-    const dots = document.querySelectorAll('.page-dot');
-    const soundDock = document.getElementById('interactive-sound-dock');
     const slideViewport = document.getElementById('slide-viewport');
+    const soundDock = document.getElementById('sound-dock');
+    const dotsContainer = document.getElementById('dots-container');
+    const startOverlay = document.getElementById('start-overlay');
     const rippleEl = document.getElementById('sound-ripple');
+    const dots = document.querySelectorAll('.dot');
 
-    const btnModeSlides = document.getElementById('btn-mode-slides');
-    const btnModeContinuous = document.getElementById('btn-mode-continuous');
-    const modePresentation = document.getElementById('mode-presentation');
-    const modeContinuous = document.getElementById('mode-continuous');
-    const btnAutoplay = document.getElementById('btn-autoplay');
-    const btnFullscreen = document.getElementById('btn-fullscreen');
-
-    // Slide interactive button definitions
+    // Slide Sound definitions
     const slideSounds = {
-      1: {
-        text: '✨ ¡Bienvenidos a la cueva de Tito! (Toca para iniciar)',
-        action: () => { playCalmChime(); startMusic(); },
-        btnClass: 'sound-trigger-btn'
-      },
-      2: {
-        text: '🍃 Tito vive en una cueva grande (Toca aquí)',
-        action: () => playSoftTone(),
-        btnClass: 'sound-trigger-btn'
-      },
-      3: {
-        text: '🎵 Canción bajita de Mamá Osa: «Buenos días, Tito»',
-        action: () => playLullabySing(),
-        btnClass: 'sound-trigger-btn'
-      },
       4: {
-        text: '😄 🔊 ¡Escuchar risita de Tito! («¡ji, ji, ji!»)',
-        action: () => playAudio('audio-laughter'),
-        btnClass: 'sound-trigger-btn btn-laughter'
+        text: '😄 🔊 «¡ji, ji, ji!»',
+        badgeClass: 'sound-badge btn-laughter',
+        play: () => playSound('laughter')
       },
       5: {
-        text: '🚪 🔊 ¡Escuchar portazo inesperado! («¡CLANC, CLANC!»)',
-        action: () => playAudio('audio-door'),
-        btnClass: 'sound-trigger-btn btn-door'
+        text: '🚪 🔊 «¡CLANC, CLANC!»',
+        badgeClass: 'sound-badge btn-door',
+        play: () => playSound('door')
       },
       6: {
-        text: '💓 🔊 ¡Escuchar el corazón asustado! («¡PUM, PUM, PUM!»)',
-        action: () => playAudio('audio-heart'),
-        btnClass: 'sound-trigger-btn btn-heart'
+        text: '💓 🔊 «¡PUM, PUM, PUM!»',
+        badgeClass: 'sound-badge btn-heart',
+        play: () => playSound('heart')
       },
       7: {
-        text: '🤱 🔊 Abrazo de mamá y calma lenta («Aquí estoy»)',
-        action: () => playSlowHeartbeat(),
-        btnClass: 'sound-trigger-btn btn-calm'
+        text: '🤱 🔊 «Aquí estoy» (Calma)',
+        badgeClass: 'sound-badge btn-calm',
+        play: () => playSlowHeartbeat()
       },
       8: {
-        text: '🍃 🔊 Tito siente algo en la pancita (Tristeza)',
-        action: () => playSadnessBreathe(),
-        btnClass: 'sound-trigger-btn'
+        text: '🍃 🔊 Sentir la pancita (Tristeza)',
+        badgeClass: 'sound-badge',
+        play: () => playSadnessBreathe()
       },
       9: {
-        text: '✨ 🔊 La compañía de Osa Rosa («Yo estoy contigo»)',
-        action: () => playCalmChime(),
-        btnClass: 'sound-trigger-btn btn-calm'
+        text: '✨ 🔊 «Yo estoy contigo»',
+        badgeClass: 'sound-badge btn-calm',
+        play: () => playCalmChime()
       },
       10: {
-        text: '⭐ 🔊 Celebrar las emociones de Tito («¡Y todo está bien!»)',
-        action: () => playCelebration(),
-        btnClass: 'sound-trigger-btn btn-laughter'
+        text: '⭐ 🔊 «¡Y todo está bien!»',
+        badgeClass: 'sound-badge btn-laughter',
+        play: () => playCelebration()
       }
     };
 
-    // Initialize Page
+    // Navigation function
     function goToPage(page) {
       if (page < 1) page = 1;
       if (page > totalPages) page = totalPages;
       currentPage = page;
 
-      // Update slide images
+      // Update active slide image
       for (let i = 1; i <= totalPages; i++) {
-        const img = document.getElementById(`slide-img-${i}`);
-        if (img) {
+        const el = document.getElementById(`slide-${i}`);
+        if (el) {
           if (i === currentPage) {
-            img.classList.add('active');
+            el.classList.add('active');
           } else {
-            img.classList.remove('active');
+            el.classList.remove('active');
           }
         }
       }
 
-      // Update Navigation Buttons
+      // Arrows disabled states
       btnPrev.disabled = (currentPage === 1);
       btnNext.disabled = (currentPage === totalPages);
 
-      // Update Progress Bar & Counter
-      const pct = (currentPage / totalPages) * 100;
-      progressBarFill.style.width = `${pct}%`;
-      pageCounter.textContent = `Página ${currentPage} de ${totalPages}`;
-
-      // Update Page Dots
-      dots.forEach(dot => {
-        const p = parseInt(dot.getAttribute('data-page'));
-        if (p === currentPage) {
+      // Dots state
+      dots.forEach((dot, idx) => {
+        if (idx + 1 === currentPage) {
           dot.classList.add('active');
         } else {
           dot.classList.remove('active');
         }
       });
 
-      // Update Interactive Sound Dock
-      updateSoundDock();
+      // Update Sound Badge
+      updateSoundBadge();
     }
 
-    function updateSoundDock() {
+    function updateSoundBadge() {
       soundDock.innerHTML = '';
-      const soundData = slideSounds[currentPage];
-      if (soundData) {
+      const data = slideSounds[currentPage];
+      if (data) {
         const btn = document.createElement('button');
-        btn.className = soundData.btnClass;
-        btn.innerHTML = soundData.text;
+        btn.className = data.badgeClass;
+        btn.innerHTML = data.text;
         btn.onclick = (e) => {
           e.stopPropagation();
-          soundData.action();
+          data.play();
           triggerRipple();
         };
         soundDock.appendChild(btn);
@@ -1064,144 +661,113 @@
     // Ripple visual animation
     function triggerRipple() {
       rippleEl.classList.remove('animate');
-      void rippleEl.offsetWidth; // force reflow
+      void rippleEl.offsetWidth;
       rippleEl.classList.add('animate');
     }
 
-    // Audio Player Logic
-    function startMusic() {
-      audioBgm.volume = parseFloat(volMusic.value);
-      audioBgm.play().then(() => {
-        btnToggleMusic.textContent = '⏸️';
-      }).catch(err => {
-        console.log('Audio autoplay prevented by browser interaction policy:', err);
-      });
-    }
-
-    btnToggleMusic.addEventListener('click', () => {
-      if (audioBgm.paused) {
-        startMusic();
-      } else {
-        audioBgm.pause();
-        btnToggleMusic.textContent = '▶️';
-      }
-    });
-
-    volMusic.addEventListener('input', (e) => {
-      audioBgm.volume = parseFloat(e.target.value);
-    });
-
-    // Play specific sound element
-    function playAudio(elementId) {
-      const el = document.getElementById(elementId);
-      if (el) {
-        el.currentTime = 0;
-        el.play().catch(e => console.log('Audio play error:', e));
-      }
-      triggerRipple();
-    }
-
-    // Web Audio Synthesizer (Zero-latency fallback & dynamic ambient sounds)
-    let audioCtx = null;
-    function getAudioContext() {
+    // Audio Engine & Start
+    function unlockAudio() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
       if (audioCtx.state === 'suspended') {
         audioCtx.resume();
       }
-      return audioCtx;
     }
 
-    function playSoftTone() {
-      const ctx = getAudioContext();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(329.63, ctx.currentTime); // E4
-      osc.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.6); // A4
-      gain.gain.setValueAtTime(0, ctx.currentTime);
-      gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.1);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + 1.3);
-      triggerRipple();
-    }
-
-    function playLullabySing() {
-      const ctx = getAudioContext();
-      const notes = [523.25, 587.33, 659.25, 523.25]; // C5, D5, E5, C5
-      notes.forEach((freq, idx) => {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.value = freq;
-        const start = ctx.currentTime + (idx * 0.35);
-        gain.gain.setValueAtTime(0, start);
-        gain.gain.linearRampToValueAtTime(0.2, start + 0.05);
-        gain.gain.exponentialRampToValueAtTime(0.001, start + 0.5);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(start);
-        osc.stop(start + 0.55);
+    function startBackgroundMusic() {
+      unlockAudio();
+      audioBgm.volume = 0.35;
+      audioBgm.play().then(() => {
+        isMusicPlaying = true;
+        btnMusic.textContent = '🎵';
+        btnMusic.classList.add('playing');
+      }).catch(err => {
+        console.log('Autoplay prevented by browser:', err);
       });
+    }
+
+    function toggleMusic() {
+      if (audioBgm.paused) {
+        startBackgroundMusic();
+      } else {
+        audioBgm.pause();
+        isMusicPlaying = false;
+        btnMusic.textContent = '🔇';
+        btnMusic.classList.remove('playing');
+      }
+    }
+
+    btnMusic.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMusic();
+    });
+
+    // Sound effect playback
+    function playSound(type) {
+      unlockAudio();
+      let el = null;
+      if (type === 'laughter') el = audioLaughter;
+      if (type === 'door') el = audioDoor;
+      if (type === 'heart') el = audioHeart;
+      if (el) {
+        el.currentTime = 0;
+        el.play().catch(e => console.log('Audio error:', e));
+      }
       triggerRipple();
     }
 
+    // Web Audio Synthesizer for gentle emotional tones
     function playSlowHeartbeat() {
-      const ctx = getAudioContext();
-      // Two gentle, slowing heartbeats
+      unlockAudio();
       const beats = [0, 0.45, 1.2, 1.7];
-      beats.forEach((t) => {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
+      beats.forEach(t => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(80, ctx.currentTime + t);
-        osc.frequency.exponentialRampToValueAtTime(45, ctx.currentTime + t + 0.15);
-        gain.gain.setValueAtTime(0.35, ctx.currentTime + t);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + 0.25);
+        osc.frequency.setValueAtTime(80, audioCtx.currentTime + t);
+        osc.frequency.exponentialRampToValueAtTime(45, audioCtx.currentTime + t + 0.15);
+        gain.gain.setValueAtTime(0.35, audioCtx.currentTime + t);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + t + 0.25);
         osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(ctx.currentTime + t);
-        osc.stop(ctx.currentTime + t + 0.3);
+        gain.connect(audioCtx.destination);
+        osc.start(audioCtx.currentTime + t);
+        osc.stop(audioCtx.currentTime + t + 0.3);
       });
       triggerRipple();
     }
 
     function playSadnessBreathe() {
-      const ctx = getAudioContext();
-      // Gentle warm sigh tone
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
+      unlockAudio();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(392, ctx.currentTime); // G4
-      osc.frequency.linearRampToValueAtTime(329.63, ctx.currentTime + 1.2); // E4
-      gain.gain.setValueAtTime(0.01, ctx.currentTime);
-      gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + 0.4);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.6);
+      osc.frequency.setValueAtTime(392, audioCtx.currentTime);
+      osc.frequency.linearRampToValueAtTime(329.63, audioCtx.currentTime + 1.2);
+      gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.18, audioCtx.currentTime + 0.4);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.6);
       osc.connect(gain);
-      gain.connect(ctx.destination);
+      gain.connect(audioCtx.destination);
       osc.start();
-      osc.stop(ctx.currentTime + 1.7);
+      osc.stop(audioCtx.currentTime + 1.7);
       triggerRipple();
     }
 
     function playCalmChime() {
-      const ctx = getAudioContext();
-      const notes = [659.25, 783.99, 987.77, 1318.51]; // E5, G5, B5, E6
+      unlockAudio();
+      const notes = [659.25, 783.99, 987.77, 1318.51];
       notes.forEach((freq, idx) => {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
         osc.type = 'sine';
         osc.frequency.value = freq;
-        const start = ctx.currentTime + (idx * 0.15);
+        const start = audioCtx.currentTime + (idx * 0.15);
         gain.gain.setValueAtTime(0, start);
         gain.gain.linearRampToValueAtTime(0.25, start + 0.03);
         gain.gain.exponentialRampToValueAtTime(0.001, start + 1.4);
         osc.connect(gain);
-        gain.connect(ctx.destination);
+        gain.connect(audioCtx.destination);
         osc.start(start);
         osc.stop(start + 1.5);
       });
@@ -1209,152 +775,126 @@
     }
 
     function playCelebration() {
-      const ctx = getAudioContext();
-      const chord = [523.25, 659.25, 783.99, 1046.50]; // C Major
+      unlockAudio();
+      const chord = [523.25, 659.25, 783.99, 1046.50];
       chord.forEach((freq, idx) => {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
         osc.type = 'triangle';
         osc.frequency.value = freq;
-        const start = ctx.currentTime + (idx * 0.1);
+        const start = audioCtx.currentTime + (idx * 0.1);
         gain.gain.setValueAtTime(0, start);
         gain.gain.linearRampToValueAtTime(0.28, start + 0.05);
         gain.gain.exponentialRampToValueAtTime(0.001, start + 2.0);
         osc.connect(gain);
-        gain.connect(ctx.destination);
+        gain.connect(audioCtx.destination);
         osc.start(start);
         osc.stop(start + 2.1);
       });
       triggerRipple();
     }
 
-    // View Navigation Event Listeners
-    btnPrev.addEventListener('click', () => {
-      goToPage(currentPage - 1);
-    });
-
-    btnNext.addEventListener('click', () => {
-      goToPage(currentPage + 1);
-    });
-
-    // Clicking on the slide advances to next page
-    slideViewport.addEventListener('click', () => {
-      // Trigger sound first if on specific pages, or advance
-      if (currentPage < totalPages) {
-        goToPage(currentPage + 1);
+    // Page tap interaction: Tap right half to go forward, tap left half to go back
+    slideViewport.addEventListener('click', (e) => {
+      const rect = slideViewport.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      if (clickX > rect.width * 0.4) {
+        if (currentPage < totalPages) goToPage(currentPage + 1);
+      } else {
+        if (currentPage > 1) goToPage(currentPage - 1);
       }
     });
 
-    // Page dots navigation
+    btnPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToPage(currentPage - 1);
+    });
+
+    btnNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToPage(currentPage + 1);
+    });
+
+    // Minimal dots click
     dots.forEach(dot => {
-      dot.addEventListener('click', () => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
         const p = parseInt(dot.getAttribute('data-page'));
         goToPage(p);
       });
     });
 
-    // Keyboard Shortcuts
+    // Keyboard support
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
-        if (currentPage < totalPages) {
-          goToPage(currentPage + 1);
-        }
+        if (currentPage < totalPages) goToPage(currentPage + 1);
       } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
-        if (currentPage > 1) {
-          goToPage(currentPage - 1);
-        }
+        if (currentPage > 1) goToPage(currentPage - 1);
       } else if (e.key === 'm' || e.key === 'M') {
-        btnToggleMusic.click();
+        toggleMusic();
       } else if (e.key === 'f' || e.key === 'F') {
         btnFullscreen.click();
       }
     });
 
-    // Touch Swipe Gestures
+    // Touch swipe support
     let touchStartX = 0;
     slideViewport.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
 
     slideViewport.addEventListener('touchend', (e) => {
-      const touchEndX = e.changedTouches[0].screenX;
-      const diffX = touchEndX - touchStartX;
-      if (diffX < -50 && currentPage < totalPages) {
+      const diffX = e.changedTouches[0].screenX - touchStartX;
+      if (diffX < -45 && currentPage < totalPages) {
         goToPage(currentPage + 1);
-      } else if (diffX > 50 && currentPage > 1) {
+      } else if (diffX > 45 && currentPage > 1) {
         goToPage(currentPage - 1);
       }
     }, { passive: true });
 
-    // Mode Switcher: Presentation vs Continuous
-    btnModeSlides.addEventListener('click', () => {
-      btnModeSlides.classList.add('active');
-      btnModeContinuous.classList.remove('active');
-      modePresentation.style.display = 'flex';
-      modeContinuous.style.display = 'none';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    btnModeContinuous.addEventListener('click', () => {
-      btnModeContinuous.classList.add('active');
-      btnModeSlides.classList.remove('active');
-      modePresentation.style.display = 'none';
-      modeContinuous.style.display = 'flex';
-      // Scroll to current page card
-      const targetCard = document.getElementById(`card-${currentPage}`);
-      if (targetCard) {
-        targetCard.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-
-    // Auto Play Presentation Timer
-    btnAutoplay.addEventListener('click', () => {
-      isAutoPlaying = !isAutoPlaying;
-      if (isAutoPlaying) {
-        btnAutoplay.classList.add('active');
-        btnAutoplay.innerHTML = '⏸️ Detener Auto';
-        startAutoPlay();
-      } else {
-        btnAutoplay.classList.remove('active');
-        btnAutoplay.innerHTML = '⏱️ Auto-Lectura';
-        clearInterval(autoPlayTimer);
-      }
-    });
-
-    function startAutoPlay() {
-      clearInterval(autoPlayTimer);
-      autoPlayTimer = setInterval(() => {
-        if (currentPage < totalPages) {
-          goToPage(currentPage + 1);
-        } else {
-          goToPage(1); // loop back
-        }
-      }, 10000); // 10 seconds per slide
-    }
-
-    // Fullscreen Toggle
-    btnFullscreen.addEventListener('click', () => {
+    // Fullscreen support
+    btnFullscreen.addEventListener('click', (e) => {
+      e.stopPropagation();
       if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(err => {
-          console.log('Error attempting to enable fullscreen:', err.message);
-        });
+        document.documentElement.requestFullscreen().catch(() => {});
       } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        }
+        if (document.exitFullscreen) document.exitFullscreen();
       }
     });
 
-    // Check URL query param e.g. ?page=4
+    // Autoplay Music Trigger:
+    // 1. Try immediate autoplay on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      audioBgm.volume = 0.35;
+      audioBgm.play().then(() => {
+        isMusicPlaying = true;
+        btnMusic.textContent = '🎵';
+        btnMusic.classList.add('playing');
+        startOverlay.classList.add('hidden'); // No overlay needed if autoplay succeeded!
+      }).catch(() => {
+        // Autoplay blocked by mobile browser policy -> overlay will prompt user to tap once
+        console.log('Mobile browser policy: Waiting for first user touch to play music.');
+      });
+    });
+
+    // 2. On start overlay tap (guarantees 100% audio playback on mobile)
+    startOverlay.addEventListener('click', () => {
+      startOverlay.classList.add('hidden');
+      startBackgroundMusic();
+    });
+
+    // Also on any first interaction anywhere
+    document.body.addEventListener('click', function unlockOnFirstTouch() {
+      if (audioBgm.paused && startOverlay.classList.contains('hidden')) {
+        startBackgroundMusic();
+      }
+      document.body.removeEventListener('click', unlockOnFirstTouch);
+    }, { once: true });
+
+    // Initial query param or start on page 1
     const urlParams = new URLSearchParams(window.location.search);
     const initialPage = parseInt(urlParams.get('page')) || 1;
     goToPage(initialPage);
-
-    // Initial gentle prompt to start sound on first interaction anywhere
-    document.body.addEventListener('click', function initAudioOnFirstTouch() {
-      getAudioContext();
-      document.body.removeEventListener('click', initAudioOnFirstTouch);
-    }, { once: true });
   </script>
 </body>
 </html>
