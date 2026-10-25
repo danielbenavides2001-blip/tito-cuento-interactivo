@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ver Tito en Celular</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #FAF7F0;
+      color: #26372B;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    .card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 36px 40px;
+      box-shadow: 0 16px 45px rgba(27, 74, 56, 0.1);
+      max-width: 520px;
+      text-align: center;
+      border: 1px solid rgba(215, 200, 170, 0.5);
+    }
+    .badge {
+      background: #E8F3EE;
+      color: #1B4A38;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 14px;
+      font-size: 0.85rem;
+    }
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #1B4A38;
+      margin: 0 0 10px 0;
+    }
+    p.desc {
+      color: #556B5D;
+      font-size: 1rem;
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+    .qr-frame {
+      background: #FAF7F0;
+      border: 2px dashed #B4731E;
+      border-radius: 18px;
+      padding: 16px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    .qr-frame img {
+      display: block;
+      width: 260px;
+      height: 260px;
+      border-radius: 8px;
+    }
+    .url-box {
+      background: #F4EFE6;
+      border-radius: 12px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: #B4731E;
+      margin-bottom: 24px;
+      word-break: break-all;
+    }
+    .steps {
+      text-align: left;
+      background: #F9Fbf9;
+      border-radius: 16px;
+      padding: 18px 22px;
+      border: 1px solid #E0ECE5;
+      font-size: 0.95rem;
+      color: #334D3E;
+    }
+    .steps ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .steps li {
+      margin-bottom: 8px;
+    }
+    .steps li:last-child {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge">📱 Conexión Wi-Fi Instantánea</div>
+    <h1>Abre el Cuento en tu Celular</h1>
+    <p class="desc">Apunta la cámara de tu teléfono al código QR para empezar a leer con música y efectos interactivos.</p>
+    
+    <div class="qr-frame">
+      <img src="qr_celular.png" alt="Código QR para abrir en celular">
+    </div>
+
+    <div class="url-box">
+      http://192.168.80.13:8000/index.html
+    </div>
+
+    <div class="steps">
+      <ol>
+        <li>Asegúrate de que tu celular esté conectado al <b>mismo Wi-Fi</b> que este computador.</li>
+        <li>Abre la <b>cámara de tu celular</b> (o escáner QR).</li>
+        <li>Apunta al código QR y toca el enlace que aparece en pantalla.</li>
+        <li>¡Gira tu celular de forma <b>horizontal</b> para la mejor experiencia de lectura!</li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>
