@@ -295,80 +295,6 @@
       background: var(--primary);
     }
 
-    /* Initial Tap-to-Start Banner (Ensures 100% Mobile Browser Autoplay) */
-    .start-prompt {
-      position: fixed;
-      inset: 0;
-      background: rgba(250, 247, 240, 0.88);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      cursor: pointer;
-      transition: opacity 0.4s ease, visibility 0.4s ease;
-    }
-
-    .start-prompt.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .start-card {
-      background: #FFFFFF;
-      padding: 32px 38px;
-      border-radius: 28px;
-      box-shadow: 0 20px 50px rgba(27, 74, 56, 0.14);
-      border: 1px solid rgba(215, 200, 170, 0.6);
-      text-align: center;
-      max-width: 380px;
-      animation: pulse-start 2s infinite ease-in-out;
-    }
-
-    .start-card .bear-icon {
-      font-size: 3.5rem;
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    .start-card h2 {
-      font-size: 1.45rem;
-      font-weight: 900;
-      color: var(--primary);
-      margin-bottom: 8px;
-    }
-
-    .start-card p {
-      font-size: 0.95rem;
-      color: #556B5D;
-      line-height: 1.4;
-      margin-bottom: 18px;
-    }
-
-    .start-btn {
-      background: var(--primary);
-      color: #FFFFFF;
-      font-family: inherit;
-      font-size: 1.05rem;
-      font-weight: 800;
-      padding: 12px 28px;
-      border-radius: 25px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 6px 18px rgba(27, 74, 56, 0.3);
-    }
-
-    @keyframes pulse-start {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.025); }
-    }
-
     /* Sound Wave Ripple Effect */
     .sound-ripple {
       position: fixed;
@@ -494,16 +420,6 @@
     <source src="assets/audio/sonido_corazon_pum_pum.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Initial Tap to Start Overlay (Unlocks Browser Audio Engine smoothly) -->
-  <div id="start-overlay" class="start-prompt">
-    <div class="start-card">
-      <span class="bear-icon">🐻</span>
-      <h2>Tito y los cambios de la cueva</h2>
-      <p>Cuentos para sentir • 0 a 3 años<br>Toca para abrir el cuento con música suave y sonidos.</p>
-      <button class="start-btn">✨ Abrir Cuento ✨</button>
-    </div>
-  </div>
-
   <!-- Main Story Stage -->
   <main class="book-stage">
 
@@ -564,7 +480,6 @@
     const slideViewport = document.getElementById('slide-viewport');
     const soundDock = document.getElementById('sound-dock');
     const dotsContainer = document.getElementById('dots-container');
-    const startOverlay = document.getElementById('start-overlay');
     const rippleEl = document.getElementById('sound-ripple');
     const dots = document.querySelectorAll('.dot');
 
@@ -863,33 +778,26 @@
     });
 
     // Autoplay Music Trigger:
-    // 1. Try immediate autoplay on page load
+    // 1. Inmediato apenas se abre la página
     window.addEventListener('DOMContentLoaded', () => {
-      audioBgm.volume = 0.35;
-      audioBgm.play().then(() => {
-        isMusicPlaying = true;
-        btnMusic.textContent = '🎵';
-        btnMusic.classList.add('playing');
-        startOverlay.classList.add('hidden'); // No overlay needed if autoplay succeeded!
-      }).catch(() => {
-        // Autoplay blocked by mobile browser policy -> overlay will prompt user to tap once
-        console.log('Mobile browser policy: Waiting for first user touch to play music.');
-      });
-    });
-
-    // 2. On start overlay tap (guarantees 100% audio playback on mobile)
-    startOverlay.addEventListener('click', () => {
-      startOverlay.classList.add('hidden');
       startBackgroundMusic();
     });
 
-    // Also on any first interaction anywhere
-    document.body.addEventListener('click', function unlockOnFirstTouch() {
-      if (audioBgm.paused && startOverlay.classList.contains('hidden')) {
+    // 2. Desbloqueo transparente al primer toque/clic en cualquier parte de la pantalla
+    function unlockAudioOnFirstInteraction() {
+      if (audioBgm.paused) {
         startBackgroundMusic();
       }
-      document.body.removeEventListener('click', unlockOnFirstTouch);
-    }, { once: true });
+      window.removeEventListener('pointerdown', unlockAudioOnFirstInteraction);
+      window.removeEventListener('touchstart', unlockAudioOnFirstInteraction);
+      window.removeEventListener('click', unlockAudioOnFirstInteraction);
+      window.removeEventListener('keydown', unlockAudioOnFirstInteraction);
+    }
+
+    window.addEventListener('pointerdown', unlockAudioOnFirstInteraction, { passive: true });
+    window.addEventListener('touchstart', unlockAudioOnFirstInteraction, { passive: true });
+    window.addEventListener('click', unlockAudioOnFirstInteraction, { passive: true });
+    window.addEventListener('keydown', unlockAudioOnFirstInteraction, { passive: true });
 
     // Initial query param or start on page 1
     const urlParams = new URLSearchParams(window.location.search);
