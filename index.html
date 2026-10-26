@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Tito y los cambios de la cueva — Cuento Animado</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -615,7 +618,7 @@
 
       <!-- SLIDE 1: PORTADA -->
       <div id="slide-1" class="slide-canvas active">
-        <video class="bg-video" autoplay loop muted playsinline preload="auto">
+        <video class="bg-video" autoplay loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_01.png">
           <source src="assets/videos/video_01.mp4" type="video/mp4">
         </video>
         <div class="story-overlay overlay-left">
@@ -626,7 +629,7 @@
 
       <!-- SLIDE 2: LA CUEVA GRANDE -->
       <div id="slide-2" class="slide-canvas">
-        <video class="bg-video" loop muted playsinline preload="auto">
+        <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_02.png">
           <source src="assets/videos/video_02.mp4" type="video/mp4">
         </video>
         <div class="story-overlay overlay-left frosted-card">
@@ -638,7 +641,7 @@
 
       <!-- SLIDE 3: MAÑANA TIBIA -->
       <div id="slide-3" class="slide-canvas">
-        <video class="bg-video" loop muted playsinline preload="auto">
+        <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_03.png">
           <source src="assets/videos/video_03.mp4" type="video/mp4">
         </video>
         <div class="story-overlay overlay-left-top">
@@ -650,7 +653,7 @@
 
       <!-- SLIDE 4: TITO RÍE -->
       <div id="slide-4" class="slide-canvas">
-        <video class="bg-video" loop muted playsinline preload="auto">
+        <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_04.png">
           <source src="assets/videos/video_04.mp4" type="video/mp4">
         </video>
         <div class="story-overlay overlay-left">
@@ -663,7 +666,7 @@
 
       <!-- SLIDE 5: EL PORTAZO (Texto colocado arriba a la derecha para no tapar a Tito ni a la puerta) -->
       <div id="slide-5" class="slide-canvas">
-        <video class="bg-video" loop muted playsinline preload="auto">
+        <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_05.png">
           <source src="assets/videos/video_05.mp4" type="video/mp4">
         </video>
         <div class="story-overlay overlay-right-top frosted-card-compact">
@@ -675,7 +678,7 @@
 
       <!-- SLIDE 6: EL SUSTO -->
       <div id="slide-6" class="slide-canvas">
-        <video class="bg-video" loop muted playsinline preload="auto">
+        <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_06.png">
           <source src="assets/videos/video_06.mp4" type="video/mp4">
         </video>
         <div class="story-overlay overlay-left">
@@ -689,7 +692,7 @@
 
       <!-- SLIDE 7: EL ABRAZO -->
       <div id="slide-7" class="slide-canvas">
-        <video class="bg-video" loop muted playsinline preload="auto">
+        <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_07.png">
           <source src="assets/videos/video_07.mp4" type="video/mp4">
         </video>
         <div class="story-overlay overlay-left">
@@ -702,7 +705,7 @@
 
       <!-- SLIDE 8: LA DESPEDIDA DE LOLO -->
       <div id="slide-8" class="slide-canvas">
-        <video class="bg-video" loop muted playsinline preload="auto">
+        <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_08.png">
           <source src="assets/videos/video_08.mp4" type="video/mp4">
         </video>
         <div class="story-overlay overlay-left frosted-card">
@@ -715,7 +718,7 @@
 
       <!-- SLIDE 9: OSA ROSA ACOMPAÑA -->
       <div id="slide-9" class="slide-canvas">
-        <video class="bg-video" loop muted playsinline preload="auto">
+        <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_09.png">
           <source src="assets/videos/video_09.mp4" type="video/mp4">
         </video>
         <div class="story-overlay overlay-left frosted-card">
@@ -728,7 +731,7 @@
 
       <!-- SLIDE 10: TODO ESTÁ BIEN -->
       <div id="slide-10" class="slide-canvas">
-        <video class="bg-video" loop muted playsinline preload="auto">
+        <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_10.png">
           <source src="assets/videos/video_10.mp4" type="video/mp4">
         </video>
         <div class="story-overlay overlay-left frosted-card">
@@ -837,7 +840,11 @@
             el.classList.add('active');
             if (vid) {
               vid.currentTime = 0;
-              vid.play().catch(e => console.log('Video autoplay:', e));
+              vid.muted = true;
+              const p = vid.play();
+              if (p && typeof p.then === 'function') {
+                p.catch(e => console.log('Video autoplay note:', e));
+              }
             }
           } else {
             el.classList.remove('active');
@@ -1029,6 +1036,7 @@
     });
 
     slideViewport.addEventListener('click', (e) => {
+      resumeActiveVideo();
       if (audioBgm.paused) {
         startBackgroundMusic();
       }
@@ -1067,6 +1075,7 @@
     let touchStartX = 0;
     let touchEndX = 0;
     slideViewport.addEventListener('touchstart', (e) => {
+      resumeActiveVideo();
       touchStartX = e.changedTouches[0].screenX;
       if (audioBgm.paused) {
         startBackgroundMusic();
@@ -1105,10 +1114,22 @@
       toggleFullscreen();
     });
 
+    function resumeActiveVideo() {
+      const activeEl = document.querySelector('.slide-canvas.active');
+      if (activeEl) {
+        const vid = activeEl.querySelector('video');
+        if (vid && vid.paused) {
+          vid.muted = true;
+          vid.play().catch(() => {});
+        }
+      }
+    }
+
     // Initial setup
     window.addEventListener('DOMContentLoaded', () => {
       goToPage(1);
       const triggerStart = () => {
+        resumeActiveVideo();
         if (audioBgm.paused) {
           startBackgroundMusic();
         }
