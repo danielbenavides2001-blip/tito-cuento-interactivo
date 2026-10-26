@@ -41,13 +41,14 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* Ambient soft background */
     .ambient-bg {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, rgba(250, 247, 240, 1) 100%);
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.85) 0%, rgba(250, 247, 240, 1) 100%);
       pointer-events: none;
       z-index: 0;
     }
@@ -155,7 +156,10 @@
       z-index: 1;
     }
 
-    /* Story Overlay Containers (Desktop & Landscape) */
+    /* ============================================================
+       ORGANIC SEAMLESS OVERLAYS FOR DESKTOP & LANDSCAPE
+       Zero white cards! Blended naturally into background lighting!
+       ============================================================ */
     .story-overlay {
       position: absolute;
       z-index: 5;
@@ -165,101 +169,235 @@
       pointer-events: none;
     }
 
-    .overlay-left {
-      left: 5%;
-      top: 6%;
-      bottom: 12%;
-      width: 40%;
+    /* Slide 1: Portada (Cream left background, Tito on right) */
+    .overlay-s1 {
+      left: 6%;
+      top: 15%;
+      width: 42%;
+      color: var(--primary);
+    }
+    .overlay-s1 .story-title {
+      color: var(--primary);
+      text-shadow: 0 2px 12px rgba(255, 255, 255, 0.95), 0 0 24px rgba(250, 247, 240, 0.85);
+    }
+    .overlay-s1 .story-subtitle {
+      color: var(--body);
+      text-shadow: 0 1px 8px rgba(255, 255, 255, 0.95);
     }
 
-    .overlay-left-top {
-      left: 5%;
-      top: 6%;
-      width: 48%;
-    }
-
-    .overlay-right-top {
-      right: 4%;
-      top: 5%;
-      width: 34%;
-      align-items: flex-start;
+    /* Slide 2: La cueva grande (Bears on left, Open sky-blue on RIGHT) */
+    .overlay-s2 {
+      right: 6%;
+      top: 15%;
+      width: 33%;
       text-align: left;
     }
-
-    /* Frosted card overlay for scenes needing high contrast */
-    .frosted-card {
-      background: rgba(255, 255, 255, 0.84);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      padding: 22px 26px;
-      border-radius: 18px;
-      box-shadow: 0 8px 30px rgba(27, 74, 56, 0.08);
-      border: 1px solid rgba(230, 220, 205, 0.85);
-      height: fit-content;
-      align-self: center;
+    .overlay-s2 .slide-heading {
+      color: #143B4D;
+      text-shadow: 0 2px 14px rgba(255, 255, 255, 0.95), 0 0 25px rgba(205, 227, 238, 0.9);
+    }
+    .overlay-s2 .story-text {
+      color: #243D49;
+      text-shadow: 0 1px 10px rgba(255, 255, 255, 0.95), 0 0 20px rgba(205, 227, 238, 0.85);
+    }
+    .overlay-s2 .story-text strong {
+      color: #143B4D;
     }
 
-    .frosted-card-compact {
-      background: rgba(255, 255, 255, 0.86);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      padding: 16px 20px;
-      border-radius: 16px;
-      box-shadow: 0 8px 25px rgba(27, 74, 56, 0.1);
-      border: 1px solid rgba(230, 220, 205, 0.85);
-      height: fit-content;
+    /* Slide 3: Mañana tibia (Bears at bottom, warm morning light TOP-LEFT) */
+    .overlay-s3 {
+      left: 5%;
+      top: 4%;
+      width: 48%;
+    }
+    .overlay-s3 .story-text {
+      color: #2E1E14;
+      font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+      margin-bottom: 6px;
+      text-shadow: 0 2px 12px rgba(255, 255, 255, 0.95), 0 0 22px rgba(255, 248, 235, 0.9);
+    }
+    .overlay-s3 .story-text strong {
+      color: #24160E;
+    }
+    .overlay-s3 .story-sound {
+      color: #B4731E;
+      font-size: clamp(1.15rem, 1.8vw, 1.55rem);
+      margin: 2px 0 0 0;
+      text-shadow: 0 2px 14px rgba(255, 255, 255, 0.95), 0 0 20px rgba(255, 245, 220, 0.9);
     }
 
-    /* Typography inside Story */
+    /* Slide 4: Tito ríe (Tito on right, clean sky-blue on LEFT) */
+    .overlay-s4 {
+      left: 6%;
+      top: 14%;
+      width: 38%;
+    }
+    .overlay-s4 .slide-heading {
+      color: #153C4E;
+      text-shadow: 0 2px 14px rgba(255, 255, 255, 0.95), 0 0 25px rgba(210, 231, 243, 0.9);
+    }
+    .overlay-s4 .story-sound {
+      text-shadow: 0 2px 12px rgba(255, 255, 255, 0.95);
+    }
+    .overlay-s4 .story-text {
+      color: #233D48;
+      text-shadow: 0 1px 10px rgba(255, 255, 255, 0.95), 0 0 20px rgba(210, 231, 243, 0.85);
+    }
+
+    /* Slide 5: El portazo (Door left, Tito bottom-right, text TOP-RIGHT) */
+    .overlay-s5 {
+      right: 5%;
+      top: 5%;
+      width: 30%;
+      text-align: left;
+    }
+    .overlay-s5 .story-text {
+      color: #FFFDF5;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 0 24px rgba(25, 18, 12, 0.9);
+    }
+    .overlay-s5 .story-text strong {
+      color: #FFF;
+    }
+    .overlay-s5 .story-sound {
+      color: #FF6B55;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.95), 0 0 30px rgba(217, 83, 64, 0.7);
+    }
+
+    /* Slide 6: El susto (Tito on right, clean warm cream on LEFT) */
+    .overlay-s6 {
+      left: 6%;
+      top: 14%;
+      width: 40%;
+    }
+    .overlay-s6 .story-text {
+      color: var(--body);
+      text-shadow: 0 2px 12px rgba(255, 255, 255, 0.95), 0 0 22px rgba(250, 245, 235, 0.9);
+    }
+    .overlay-s6 .story-text strong {
+      color: var(--primary);
+    }
+    .overlay-s6 .story-sound {
+      text-shadow: 0 2px 12px rgba(255, 255, 255, 0.95);
+    }
+
+    /* Slide 7: El abrazo (Mama & Tito on right, soft blue on LEFT) */
+    .overlay-s7 {
+      left: 4%;
+      top: 12%;
+      width: 28%;
+    }
+    .overlay-s7 .slide-heading {
+      color: #153A4C;
+      text-shadow: 0 2px 14px rgba(255, 255, 255, 0.95), 0 0 25px rgba(205, 228, 241, 0.9);
+    }
+    .overlay-s7 .story-text {
+      color: #243C48;
+      text-shadow: 0 1px 10px rgba(255, 255, 255, 0.95), 0 0 20px rgba(205, 228, 241, 0.85);
+    }
+    .overlay-s7 .story-text strong {
+      color: #153A4C;
+    }
+    .overlay-s7 .story-sound {
+      color: #B4731E;
+      text-shadow: 0 2px 12px rgba(255, 255, 255, 0.95);
+    }
+
+    /* Slide 8: La despedida de Lolo (Lolo left, Tito center, text FAR-RIGHT) */
+    .overlay-s8 {
+      right: 4%;
+      top: 10%;
+      width: 23%;
+      text-align: left;
+    }
+    .overlay-s8 .story-text {
+      color: #FFFDF7;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 0 24px rgba(20, 15, 10, 0.95);
+      line-height: 1.35;
+    }
+    .overlay-s8 .story-text strong {
+      color: #FFFFFF;
+    }
+    .overlay-s8 .story-sound {
+      color: #6BB1E8;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 0 25px rgba(43, 108, 176, 0.8);
+    }
+
+    /* Slide 9: Osa Rosa acompaña (Osa Rosa left, Tito center, text RIGHT cave wall) */
+    .overlay-s9 {
+      right: 4%;
+      top: 12%;
+      width: 28%;
+      text-align: left;
+    }
+    .overlay-s9 .slide-heading {
+      color: #FFFDF5;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 0 25px rgba(35, 22, 14, 0.95);
+    }
+    .overlay-s9 .story-text {
+      color: #F6EDE3;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9), 0 0 22px rgba(35, 22, 14, 0.9);
+    }
+    .overlay-s9 .story-sound {
+      color: #F2A949;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 0 25px rgba(180, 115, 30, 0.8);
+    }
+
+    /* Slide 10: Todo está bien (Bed and bears right, text FAR-LEFT) */
+    .overlay-s10 {
+      left: 4%;
+      top: 10%;
+      width: 26%;
+      text-align: left;
+    }
+    .overlay-s10 .slide-heading {
+      color: #FFFDF0;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 0 25px rgba(20, 15, 10, 0.95);
+    }
+    .overlay-s10 .story-text {
+      color: #F7EFE4;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9), 0 0 22px rgba(20, 15, 10, 0.9);
+    }
+    .overlay-s10 .story-sound {
+      color: #FF7B66;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.95), 0 0 30px rgba(217, 83, 64, 0.8);
+    }
+
+    /* Typography inside Story (Shared Desktop) */
     .story-title {
       font-size: clamp(1.8rem, 3.8vw, 3.4rem);
       font-weight: 900;
-      color: var(--primary);
       line-height: 1.1;
       margin-bottom: 16px;
-      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.9);
     }
 
     .story-subtitle {
       font-size: clamp(1rem, 1.6vw, 1.35rem);
       font-weight: 700;
-      color: var(--body);
-      text-shadow: 0 1px 6px rgba(255, 255, 255, 0.9);
     }
 
     .slide-heading {
-      font-size: clamp(1.35rem, 2.2vw, 1.95rem);
+      font-size: clamp(1.3rem, 2.1vw, 1.85rem);
       font-weight: 800;
-      color: var(--primary);
-      line-height: 1.15;
+      line-height: 1.18;
       margin-bottom: 10px;
-      text-shadow: 0 1px 8px rgba(255, 255, 255, 0.8);
     }
 
     .story-text {
-      font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+      font-size: clamp(1.0rem, 1.5vw, 1.35rem);
       font-weight: 600;
-      color: var(--body);
-      line-height: 1.32;
+      line-height: 1.36;
       margin-bottom: 10px;
-      text-shadow: 0 1px 8px rgba(255, 255, 255, 0.9);
-    }
-
-    .story-text strong {
-      font-weight: 800;
-      color: var(--primary);
     }
 
     .story-sound {
       font-weight: 900;
-      font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+      font-size: clamp(1.25rem, 2.0vw, 1.85rem);
       line-height: 1.2;
       margin: 4px 0 10px 0;
-      text-shadow: 0 2px 12px rgba(255, 255, 255, 0.95);
     }
 
     .sound-huge {
-      font-size: clamp(1.6rem, 2.8vw, 2.5rem);
+      font-size: clamp(1.5rem, 2.6vw, 2.4rem);
     }
 
     .sound-coral { color: var(--coral); }
@@ -305,38 +443,35 @@
     .nav-arrow.prev { left: 16px; }
     .nav-arrow.next { right: 16px; }
 
-    /* Minimal floating Sound Action Button */
+    /* Floating Interactive Sound Badge */
     .sound-badge-dock {
-      position: absolute;
-      bottom: 22px;
+      position: fixed;
+      bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 40;
       display: flex;
       align-items: center;
-      justify-content: center;
-      pointer-events: none;
+      gap: 12px;
     }
 
     .sound-badge {
-      pointer-events: auto;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      background: rgba(255, 255, 255, 0.95);
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border: 2px solid var(--accent);
-      color: #633C02;
+      color: var(--accent);
       font-size: 1.05rem;
       font-weight: 800;
-      padding: 10px 24px;
-      border-radius: 30px;
       cursor: pointer;
-      box-shadow: 0 8px 24px rgba(180, 115, 30, 0.22);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      animation: sound-glow 2.2s infinite;
-      white-space: nowrap;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: sound-glow 2.4s infinite ease-in-out;
     }
 
     .sound-badge:hover {
@@ -447,78 +582,153 @@
       100% { transform: translate(-50%, -50%) scale(3.5); opacity: 0; }
     }
 
-    /* Mobile Portrait Optimization (Vertical Phone) */
+    /* Mobile Dedicated Story Reader (Hidden on Desktop) */
+    .mobile-story-reader {
+      display: none;
+    }
+
+    /* ============================================================
+       MOBILE PORTRAIT OPTIMIZATION (Vertical Smartphone)
+       Pure clean video above + dedicated book reading zone below!
+       Zero overlapping with characters!
+       ============================================================ */
     @media (max-width: 768px) and (orientation: portrait) {
-      .book-stage {
-        padding: 6px;
+      body {
+        justify-content: flex-start;
+        padding-top: 50px;
+        overflow-y: auto;
       }
+
+      .ambient-bg {
+        background: #FAF7F0;
+      }
+
+      .top-bar {
+        top: 10px;
+        right: 12px;
+        gap: 8px;
+      }
+      .icon-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+      }
+
+      .book-stage {
+        width: 100vw;
+        height: auto;
+        min-height: calc(100vh - 50px);
+        padding: 6px 12px 60px 12px;
+        justify-content: flex-start;
+      }
+
+      /* Clean 16:9 Video Canvas (NO text inside video on mobile) */
       .slide-frame {
-        width: 98vw;
+        width: 100%;
+        max-width: 480px;
         height: auto;
         aspect-ratio: 16 / 9;
-        border-radius: 14px;
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(27, 74, 56, 0.12);
+        margin-bottom: 12px;
       }
-      .nav-arrow {
-        width: 32px;
-        height: 32px;
-        font-size: 1.05rem;
-        opacity: 0.8;
-        background: rgba(255, 255, 255, 0.75);
-      }
-      .nav-arrow.prev { left: 4px; }
-      .nav-arrow.next { right: 4px; }
 
-      .overlay-left {
-        left: 38px;
-        top: 4%;
-        bottom: 6%;
-        width: 35%;
+      /* Hide in-video overlays on mobile portrait */
+      .story-overlay {
+        display: none !important;
       }
-      .overlay-left-top {
-        left: 38px;
-        top: 4%;
-        width: 40%;
-      }
-      .overlay-right-top {
-        right: 38px;
-        top: 4%;
-        width: 33%;
-      }
-      .frosted-card, .frosted-card-compact {
-        padding: 6px 8px;
-        border-radius: 8px;
-      }
-      .story-title {
-        font-size: 1.05rem;
-        line-height: 1.08;
-        margin-bottom: 3px;
-      }
-      .story-subtitle {
-        font-size: 0.65rem;
-      }
-      .slide-heading {
-        font-size: 0.82rem;
-        margin-bottom: 3px;
-        line-height: 1.12;
-      }
-      .story-text {
-        font-size: 0.66rem;
-        margin-bottom: 3px;
-        line-height: 1.18;
-      }
-      .story-sound {
-        font-size: 0.82rem;
-        margin: 2px 0 3px 0;
-      }
-      .sound-huge {
-        font-size: 0.98rem;
-      }
+
+      /* Hide floating dock on mobile; integrated into reader */
       .sound-badge-dock {
-        bottom: 24px;
+        display: none !important;
       }
-      .sound-badge {
-        font-size: 0.82rem;
-        padding: 6px 14px;
+
+      /* Mobile Story Reader Section */
+      .mobile-story-reader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        max-width: 480px;
+        padding: 4px 6px;
+        animation: fadeIn 0.25s ease-out;
+      }
+
+      .mobile-story-title {
+        font-size: 1.45rem;
+        font-weight: 900;
+        color: var(--primary);
+        line-height: 1.15;
+        margin-bottom: 6px;
+      }
+
+      .mobile-story-subtitle {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--body);
+        opacity: 0.85;
+      }
+
+      .mobile-slide-heading {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--primary);
+        line-height: 1.2;
+        margin-bottom: 8px;
+      }
+
+      .mobile-story-text {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--body);
+        line-height: 1.42;
+        margin-bottom: 8px;
+      }
+
+      .mobile-story-text strong {
+        font-weight: 800;
+        color: var(--primary);
+      }
+
+      .mobile-story-sound {
+        font-weight: 900;
+        font-size: 1.35rem;
+        line-height: 1.2;
+        margin: 6px 0 10px 0;
+      }
+
+      .mobile-sound-btn {
+        margin-top: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 20px;
+        border-radius: 26px;
+        background: #FFFFFF;
+        border: 2px solid var(--accent);
+        color: var(--accent);
+        font-size: 0.95rem;
+        font-weight: 800;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      /* Mobile Nav controls */
+      .nav-arrow {
+        position: fixed;
+        bottom: 12px;
+        top: auto;
+        transform: none;
+        width: 46px;
+        height: 46px;
+        font-size: 1.4rem;
+        z-index: 50;
+      }
+      .nav-arrow.prev { left: 16px; }
+      .nav-arrow.next { right: 16px; }
+
+      .minimal-dots {
+        bottom: 22px;
       }
     }
 
@@ -530,11 +740,11 @@
         border-radius: 12px;
       }
       .sound-badge-dock {
-        bottom: 18px;
+        bottom: 16px;
       }
       .sound-badge {
         font-size: 0.8rem;
-        padding: 6px 16px;
+        padding: 5px 14px;
       }
       .minimal-dots {
         bottom: 4px;
@@ -552,26 +762,6 @@
         width: 34px;
         height: 34px;
         font-size: 1rem;
-      }
-      .story-title {
-        font-size: 1.5rem;
-        margin-bottom: 6px;
-      }
-      .story-subtitle {
-        font-size: 0.85rem;
-      }
-      .slide-heading {
-        font-size: 1.15rem;
-        margin-bottom: 4px;
-      }
-      .story-text {
-        font-size: 0.88rem;
-        margin-bottom: 4px;
-        line-height: 1.25;
-      }
-      .story-sound {
-        font-size: 1.1rem;
-        margin: 2px 0 6px 0;
       }
     }
   </style>
@@ -622,7 +812,7 @@
         <video class="bg-video" autoplay loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_01.png">
           <source src="assets/videos/video_01.mp4" type="video/mp4">
         </video>
-        <div class="story-overlay overlay-left">
+        <div class="story-overlay overlay-s1">
           <h1 class="story-title">Tito y los<br>cambios<br>de la cueva</h1>
           <p class="story-subtitle">Cuentos para sentir • 0 a 3 años</p>
         </div>
@@ -633,7 +823,7 @@
         <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_02.png">
           <source src="assets/videos/video_02.mp4" type="video/mp4">
         </video>
-        <div class="story-overlay overlay-left frosted-card">
+        <div class="story-overlay overlay-s2">
           <h2 class="slide-heading">La cueva grande de Tito</h2>
           <p class="story-text"><strong>En una cueva grande, grande, vive un osito.</strong></p>
           <p class="story-text">Se llama Tito. Tito vive con su mamá y con otros ositos.</p>
@@ -645,7 +835,7 @@
         <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_03.png">
           <source src="assets/videos/video_03.mp4" type="video/mp4">
         </video>
-        <div class="story-overlay overlay-left-top">
+        <div class="story-overlay overlay-s3">
           <p class="story-text"><strong>Una mañana, entra una luz tibia y cálida.</strong></p>
           <p class="story-text">Mamá Osa lo acarició y le cantó bajito:</p>
           <p class="story-sound sound-ochre">«Buenos días, Tito»</p>
@@ -657,7 +847,7 @@
         <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_04.png">
           <source src="assets/videos/video_04.mp4" type="video/mp4">
         </video>
-        <div class="story-overlay overlay-left">
+        <div class="story-overlay overlay-s4">
           <h2 class="slide-heading">Tito sonríe.</h2>
           <p class="story-sound sound-coral">¿Cómo está Tito? ¡Está alegre!</p>
           <p class="story-text">Tito está feliz. La alegría sube por las patitas, hace cosquillas y sale como risita:</p>
@@ -665,12 +855,12 @@
         </div>
       </div>
 
-      <!-- SLIDE 5: EL PORTAZO (Texto colocado arriba a la derecha para no tapar a Tito ni a la puerta) -->
+      <!-- SLIDE 5: EL PORTAZO -->
       <div id="slide-5" class="slide-canvas">
         <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_05.png">
           <source src="assets/videos/video_05.mp4" type="video/mp4">
         </video>
-        <div class="story-overlay overlay-right-top frosted-card-compact">
+        <div class="story-overlay overlay-s5">
           <p class="story-text">De repente...</p>
           <p class="story-sound sound-coral sound-huge">¡CLANC, CLANC!</p>
           <p class="story-text"><strong>Suena la puerta grande de la cueva.</strong></p>
@@ -682,7 +872,7 @@
         <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_06.png">
           <source src="assets/videos/video_06.mp4" type="video/mp4">
         </video>
-        <div class="story-overlay overlay-left">
+        <div class="story-overlay overlay-s6">
           <p class="story-text"><strong>Tito se sorprendió y abrió grande los ojos.</strong></p>
           <p class="story-text">Se tapó las orejitas y su corazón hacía:</p>
           <p class="story-sound sound-coral sound-huge">¡PUM, PUM, PUM!</p>
@@ -696,7 +886,7 @@
         <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_07.png">
           <source src="assets/videos/video_07.mp4" type="video/mp4">
         </video>
-        <div class="story-overlay overlay-left">
+        <div class="story-overlay overlay-s7">
           <h2 class="slide-heading">Mamá Osa lo abrazó fuerte.</h2>
           <p class="story-text">«Tito, te asustaste. La puerta sonó muy fuerte. Aquí estoy».</p>
           <p class="story-sound sound-ochre">«Aquí estoy»</p>
@@ -709,7 +899,7 @@
         <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_08.png">
           <source src="assets/videos/video_08.mp4" type="video/mp4">
         </video>
-        <div class="story-overlay overlay-left frosted-card">
+        <div class="story-overlay overlay-s8">
           <p class="story-text"><strong>Más tarde, Lolo, el osito grande, se despide. Lolo sale de la cueva.</strong></p>
           <p class="story-text">Ya no estaba su amigo.<br><br>Tito sintió algo apretadito en la pancita.</p>
           <p class="story-text">¿Qué siente Tito?</p>
@@ -722,7 +912,7 @@
         <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_09.png">
           <source src="assets/videos/video_09.mp4" type="video/mp4">
         </video>
-        <div class="story-overlay overlay-left frosted-card">
+        <div class="story-overlay overlay-s9">
           <h2 class="slide-heading">Osa Rosa se sentó junto a Tito.</h2>
           <p class="story-text">«Estás triste porque Lolo se fue. Está bien sentirte así. Yo estoy contigo».</p>
           <p class="story-sound sound-ochre">«Yo estoy contigo»</p>
@@ -735,7 +925,7 @@
         <video class="bg-video" loop muted playsinline webkit-playsinline="true" preload="auto" poster="assets/images/slide_10.png">
           <source src="assets/videos/video_10.mp4" type="video/mp4">
         </video>
-        <div class="story-overlay overlay-left frosted-card">
+        <div class="story-overlay overlay-s10">
           <h2 class="slide-heading">Al final del día, Tito sabe algo nuevo:</h2>
           <p class="story-text">cuando la cueva cambia, Tito siente. Y lo que siente tiene nombre: alegría, susto y tristeza.<br><br>Osa Rosada lo abraza, y todo está bien.</p>
           <p class="story-sound sound-coral sound-huge">«¡Y todo está bien!»</p>
@@ -747,8 +937,11 @@
     <!-- Right Navigation Arrow -->
     <button id="btn-next" class="nav-arrow next" title="Siguiente">›</button>
 
-    <!-- Contextual Sound Badge Dock (Minimal floating action per slide) -->
+    <!-- Contextual Sound Badge Dock (Desktop) -->
     <div id="sound-dock" class="sound-badge-dock"></div>
+
+    <!-- Mobile Dedicated Story Reader (Below video on vertical phones) -->
+    <div id="mobile-story-reader" class="mobile-story-reader"></div>
 
     <!-- Minimal Dots Indicator -->
     <div class="minimal-dots" id="dots-container">
@@ -772,35 +965,93 @@
     let isMusicPlaying = false;
     let audioCtx = null;
 
-    // DOM References
+    // Elements
+    const slideViewport = document.getElementById('slide-viewport');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const dots = document.querySelectorAll('.dot');
+    const soundDock = document.getElementById('sound-dock');
+    const mobileReader = document.getElementById('mobile-story-reader');
+    const rippleEl = document.getElementById('sound-ripple');
+    const btnMusic = document.getElementById('btn-music');
+    const btnFullscreen = document.getElementById('btn-fullscreen');
+
     const audioBgm = document.getElementById('audio-bgm');
     const audioLaughter = document.getElementById('audio-laughter');
     const audioDoor = document.getElementById('audio-door');
     const audioHeart = document.getElementById('audio-heart');
-    const btnMusic = document.getElementById('btn-music');
-    const btnFullscreen = document.getElementById('btn-fullscreen');
-    const btnPrev = document.getElementById('btn-prev');
-    const btnNext = document.getElementById('btn-next');
-    const slideViewport = document.getElementById('slide-viewport');
-    const soundDock = document.getElementById('sound-dock');
-    const dotsContainer = document.getElementById('dots-container');
-    const rippleEl = document.getElementById('sound-ripple');
-    const dots = document.querySelectorAll('.dot');
 
-    // Slide Sound definitions
+    // Slide texts for Mobile Reading Zone
+    const slideMobileTexts = {
+      1: `
+        <h1 class="mobile-story-title">Tito y los cambios de la cueva</h1>
+        <p class="mobile-story-subtitle">Cuentos para sentir • 0 a 3 años</p>
+      `,
+      2: `
+        <h2 class="mobile-slide-heading">La cueva grande de Tito</h2>
+        <p class="mobile-story-text"><strong>En una cueva grande, grande, vive un osito.</strong></p>
+        <p class="mobile-story-text">Se llama Tito. Tito vive con su mamá y con otros ositos.</p>
+      `,
+      3: `
+        <p class="mobile-story-text"><strong>Una mañana, entra una luz tibia y cálida.</strong></p>
+        <p class="mobile-story-text">Mamá Osa lo acarició y le cantó bajito:</p>
+        <p class="mobile-story-sound sound-ochre">«Buenos días, Tito»</p>
+      `,
+      4: `
+        <h2 class="mobile-slide-heading">Tito sonríe.</h2>
+        <p class="mobile-story-sound sound-coral">¿Cómo está Tito? ¡Está alegre!</p>
+        <p class="mobile-story-text">Tito está feliz. La alegría sube por las patitas, hace cosquillas y sale como risita:</p>
+        <p class="mobile-story-sound sound-green">«¡ji, ji, ji!»</p>
+      `,
+      5: `
+        <p class="mobile-story-text">De repente...</p>
+        <p class="mobile-story-sound sound-coral" style="font-size:1.6rem;">¡CLANC, CLANC!</p>
+        <p class="mobile-story-text"><strong>Suena la puerta grande de la cueva.</strong></p>
+      `,
+      6: `
+        <p class="mobile-story-text"><strong>Tito se sorprendió y abrió grande los ojos.</strong></p>
+        <p class="mobile-story-text">Se tapó las orejitas y su corazón hacía:</p>
+        <p class="mobile-story-sound sound-coral" style="font-size:1.5rem;">¡PUM, PUM, PUM!</p>
+        <p class="mobile-story-sound sound-coral">¡Tito se asustó!</p>
+      `,
+      7: `
+        <h2 class="mobile-slide-heading">Mamá Osa lo abrazó fuerte.</h2>
+        <p class="mobile-story-text">«Tito, te asustaste. La puerta sonó muy fuerte. Aquí estoy».</p>
+        <p class="mobile-story-sound sound-ochre">«Aquí estoy»</p>
+        <p class="mobile-story-text"><strong>Poco a poco, el PUM, PUM se hizo más lento.</strong></p>
+      `,
+      8: `
+        <p class="mobile-story-text"><strong>Más tarde, Lolo, el osito grande, se despide y sale de la cueva.</strong></p>
+        <p class="mobile-story-text">Ya no estaba su amigo. Tito sintió algo apretadito en la pancita.</p>
+        <p class="mobile-story-sound sound-blue">¡Tito está triste!</p>
+      `,
+      9: `
+        <h2 class="mobile-slide-heading">Osa Rosa se sentó junto a Tito.</h2>
+        <p class="mobile-story-text">«Estás triste porque Lolo se fue. Está bien sentirte así. Yo estoy contigo».</p>
+        <p class="mobile-story-sound sound-ochre">«Yo estoy contigo»</p>
+        <p class="mobile-story-text">Tito se apoyó en ella y la tristeza se fue haciendo más pequeñita.</p>
+      `,
+      10: `
+        <h2 class="mobile-slide-heading">Al final del día, Tito sabe algo nuevo:</h2>
+        <p class="mobile-story-text">cuando la cueva cambia, Tito siente: alegría, susto y tristeza.<br>Osa Rosada lo abraza, y todo está bien.</p>
+        <p class="mobile-story-sound sound-coral" style="font-size:1.5rem;">«¡Y todo está bien!»</p>
+      `
+    };
+
+    // Sound configuration
     const slideSounds = {
       4: {
-        text: '😄 🔊 «¡ji, ji, ji!»',
+        text: '😄 🔊 Risita: «¡ji, ji, ji!»',
         badgeClass: 'sound-badge btn-laughter',
         play: () => playSound('laughter')
       },
       5: {
-        text: '🚪 🔊 «¡CLANC, CLANC!»',
+        text: '🚪 🔊 Portazo: «¡CLANC!»',
         badgeClass: 'sound-badge btn-door',
         play: () => playSound('door')
       },
       6: {
-        text: '💓 🔊 «¡PUM, PUM, PUM!»',
+        text: '💓 🔊 Latido: «¡PUM, PUM!»',
         badgeClass: 'sound-badge btn-heart',
         play: () => playSound('heart')
       },
@@ -844,7 +1095,7 @@
               vid.muted = true;
               const p = vid.play();
               if (p && typeof p.then === 'function') {
-                p.catch(e => console.log('Video autoplay note:', e));
+                p.catch(e => console.log('Autoplay status:', e));
               }
             }
           } else {
@@ -869,8 +1120,9 @@
         }
       });
 
-      // Update Sound Badge
+      // Update Sound Badge & Mobile Reader
       updateSoundBadge();
+      updateMobileReader();
     }
 
     function updateSoundBadge() {
@@ -886,6 +1138,26 @@
           triggerRipple();
         };
         soundDock.appendChild(btn);
+      }
+    }
+
+    function updateMobileReader() {
+      if (!mobileReader) return;
+      const textHtml = slideMobileTexts[currentPage] || '';
+      const soundData = slideSounds[currentPage];
+      let soundBtnHtml = '';
+      if (soundData) {
+        soundBtnHtml = `<button class="mobile-sound-btn" id="m-sound-btn">${soundData.text}</button>`;
+      }
+      mobileReader.innerHTML = textHtml + soundBtnHtml;
+
+      const mBtn = document.getElementById('m-sound-btn');
+      if (mBtn && soundData) {
+        mBtn.onclick = (e) => {
+          e.stopPropagation();
+          soundData.play();
+          triggerRipple();
+        };
       }
     }
 
@@ -914,7 +1186,7 @@
         btnMusic.textContent = '🎵';
         btnMusic.classList.add('playing');
       }).catch(err => {
-        console.log('Autoplay prevented by browser:', err);
+        console.log('Autoplay note:', err);
       });
     }
 
@@ -948,7 +1220,7 @@
       triggerRipple();
     }
 
-    // Web Audio Synthesizer for gentle emotional tones
+    // Synthesizer sounds
     function playSlowHeartbeat() {
       unlockAudio();
       const beats = [0, 0.45, 1.2, 1.7];
@@ -1023,6 +1295,17 @@
         osc.stop(startTime + 2.1);
       });
       triggerRipple();
+    }
+
+    function resumeActiveVideo() {
+      const activeEl = document.querySelector('.slide-canvas.active');
+      if (activeEl) {
+        const vid = activeEl.querySelector('video');
+        if (vid && vid.paused) {
+          vid.muted = true;
+          vid.play().catch(() => {});
+        }
+      }
     }
 
     // Touch, Click and Keyboard Events
@@ -1101,7 +1384,7 @@
     function toggleFullscreen() {
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(err => {
-          console.log(`Fullscreen error: ${err.message}`);
+          console.log(`Fullscreen: ${err.message}`);
         });
       } else {
         if (document.exitFullscreen) {
@@ -1114,17 +1397,6 @@
       e.stopPropagation();
       toggleFullscreen();
     });
-
-    function resumeActiveVideo() {
-      const activeEl = document.querySelector('.slide-canvas.active');
-      if (activeEl) {
-        const vid = activeEl.querySelector('video');
-        if (vid && vid.paused) {
-          vid.muted = true;
-          vid.play().catch(() => {});
-        }
-      }
-    }
 
     // Initial setup
     window.addEventListener('DOMContentLoaded', () => {
