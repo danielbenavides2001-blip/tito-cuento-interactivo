@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Tito y los cambios de la cueva</title>
+  <title>Tito y los cambios de la cueva — Cuento Animado</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-color: #FAF7F0;
       --primary: #1B4A38;
+      --body: #26372B;
       --accent: #B4731E;
       --coral: #D95340;
+      --blue: #2B6CB0;
+      --green: #2E8B57;
     }
 
     * {
@@ -50,7 +53,7 @@
       position: fixed;
       top: 14px;
       right: 18px;
-      z-index: 50;
+      z-index: 60;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -60,7 +63,7 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border: 1px solid rgba(215, 200, 170, 0.6);
@@ -89,7 +92,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Main Story Stage - Full viewport priority */
+    /* Main Story Stage */
     .book-stage {
       position: relative;
       z-index: 10;
@@ -109,9 +112,9 @@
       height: min(calc(96vw * (9 / 16)), 88vh);
       max-width: 1500px;
       aspect-ratio: 16 / 9;
-      background: #FFFFFF;
+      background: #000;
       border-radius: 20px;
-      box-shadow: 0 16px 45px rgba(27, 74, 56, 0.1), 0 2px 10px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 16px 45px rgba(27, 74, 56, 0.12), 0 2px 10px rgba(0, 0, 0, 0.05);
       overflow: hidden;
       cursor: pointer;
       border: 1px solid rgba(215, 200, 170, 0.45);
@@ -122,8 +125,6 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      object-position: center;
       display: none;
       pointer-events: none;
     }
@@ -131,13 +132,136 @@
     .slide-canvas.active {
       display: block;
       pointer-events: auto;
-      animation: fadeIn 0.2s ease-out;
+      animation: fadeIn 0.3s ease-out;
     }
 
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
+
+    /* Fullscreen Background Video inside Frame */
+    .bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 1;
+    }
+
+    /* Story Overlay Containers (Desktop & Landscape) */
+    .story-overlay {
+      position: absolute;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .overlay-left {
+      left: 5%;
+      top: 6%;
+      bottom: 12%;
+      width: 40%;
+    }
+
+    .overlay-left-top {
+      left: 5%;
+      top: 6%;
+      width: 48%;
+    }
+
+    .overlay-right-top {
+      right: 4%;
+      top: 5%;
+      width: 34%;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    /* Frosted card overlay for scenes needing high contrast */
+    .frosted-card {
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 22px 26px;
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(27, 74, 56, 0.08);
+      border: 1px solid rgba(230, 220, 205, 0.85);
+      height: fit-content;
+      align-self: center;
+    }
+
+    .frosted-card-compact {
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 16px 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(27, 74, 56, 0.1);
+      border: 1px solid rgba(230, 220, 205, 0.85);
+      height: fit-content;
+    }
+
+    /* Typography inside Story */
+    .story-title {
+      font-size: clamp(1.8rem, 3.8vw, 3.4rem);
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1.1;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.9);
+    }
+
+    .story-subtitle {
+      font-size: clamp(1rem, 1.6vw, 1.35rem);
+      font-weight: 700;
+      color: var(--body);
+      text-shadow: 0 1px 6px rgba(255, 255, 255, 0.9);
+    }
+
+    .slide-heading {
+      font-size: clamp(1.35rem, 2.2vw, 1.95rem);
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.15;
+      margin-bottom: 10px;
+      text-shadow: 0 1px 8px rgba(255, 255, 255, 0.8);
+    }
+
+    .story-text {
+      font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+      font-weight: 600;
+      color: var(--body);
+      line-height: 1.32;
+      margin-bottom: 10px;
+      text-shadow: 0 1px 8px rgba(255, 255, 255, 0.9);
+    }
+
+    .story-text strong {
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .story-sound {
+      font-weight: 900;
+      font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+      line-height: 1.2;
+      margin: 4px 0 10px 0;
+      text-shadow: 0 2px 12px rgba(255, 255, 255, 0.95);
+    }
+
+    .sound-huge {
+      font-size: clamp(1.6rem, 2.8vw, 2.5rem);
+    }
+
+    .sound-coral { color: var(--coral); }
+    .sound-green { color: var(--green); }
+    .sound-ochre { color: var(--accent); }
+    .sound-blue  { color: var(--blue); }
 
     /* Navigation Arrows */
     .nav-arrow {
@@ -218,12 +342,12 @@
     }
 
     .sound-badge.btn-laughter {
-      border-color: #2E8B57;
+      border-color: var(--green);
       color: #155734;
       box-shadow: 0 8px 24px rgba(46, 139, 87, 0.25);
     }
     .sound-badge.btn-laughter:hover {
-      background: #2E8B57;
+      background: var(--green);
       color: #FFF;
     }
 
@@ -319,54 +443,94 @@
       100% { transform: translate(-50%, -50%) scale(3.5); opacity: 0; }
     }
 
-    /* Mobile Adaptations */
-    @media (max-width: 768px) {
+    /* Mobile Portrait Optimization (Vertical Phone) */
+    @media (max-width: 768px) and (orientation: portrait) {
       .book-stage {
         padding: 6px;
       }
       .slide-frame {
         width: 98vw;
-        height: min(calc(98vw * (9 / 16)), 80vh);
+        height: auto;
+        aspect-ratio: 16 / 9;
         border-radius: 14px;
       }
       .nav-arrow {
-        width: 42px;
-        height: 42px;
-        font-size: 1.3rem;
+        width: 32px;
+        height: 32px;
+        font-size: 1.05rem;
+        opacity: 0.8;
+        background: rgba(255, 255, 255, 0.75);
       }
-      .nav-arrow.prev { left: 8px; }
-      .nav-arrow.next { right: 8px; }
-      .sound-badge {
-        font-size: 0.88rem;
-        padding: 8px 18px;
+      .nav-arrow.prev { left: 4px; }
+      .nav-arrow.next { right: 4px; }
+
+      .overlay-left {
+        left: 38px;
+        top: 4%;
+        bottom: 6%;
+        width: 35%;
+      }
+      .overlay-left-top {
+        left: 38px;
+        top: 4%;
+        width: 40%;
+      }
+      .overlay-right-top {
+        right: 38px;
+        top: 4%;
+        width: 33%;
+      }
+      .frosted-card, .frosted-card-compact {
+        padding: 6px 8px;
+        border-radius: 8px;
+      }
+      .story-title {
+        font-size: 1.05rem;
+        line-height: 1.08;
+        margin-bottom: 3px;
+      }
+      .story-subtitle {
+        font-size: 0.65rem;
+      }
+      .slide-heading {
+        font-size: 0.82rem;
+        margin-bottom: 3px;
+        line-height: 1.12;
+      }
+      .story-text {
+        font-size: 0.66rem;
+        margin-bottom: 3px;
+        line-height: 1.18;
+      }
+      .story-sound {
+        font-size: 0.82rem;
+        margin: 2px 0 3px 0;
+      }
+      .sound-huge {
+        font-size: 0.98rem;
       }
       .sound-badge-dock {
-        bottom: 34px;
+        bottom: 24px;
       }
-      .top-bar {
-        top: 10px;
-        right: 12px;
-      }
-      .icon-btn {
-        width: 38px;
-        height: 38px;
-        font-size: 1.1rem;
+      .sound-badge {
+        font-size: 0.82rem;
+        padding: 6px 14px;
       }
     }
 
-    /* Landscape Mode for Phone (Maximized Experience) */
-    @media (max-height: 500px) {
+    /* Landscape Mode for Phone (Horizontal Phone / Maximized Cinematic) */
+    @media (max-height: 520px) {
       .slide-frame {
         width: calc(94vh * (16 / 9));
         height: 94vh;
         border-radius: 12px;
       }
       .sound-badge-dock {
-        bottom: 22px;
+        bottom: 18px;
       }
       .sound-badge {
-        font-size: 0.78rem;
-        padding: 5px 14px;
+        font-size: 0.8rem;
+        padding: 6px 16px;
       }
       .minimal-dots {
         bottom: 4px;
@@ -384,6 +548,26 @@
         width: 34px;
         height: 34px;
         font-size: 1rem;
+      }
+      .story-title {
+        font-size: 1.5rem;
+        margin-bottom: 6px;
+      }
+      .story-subtitle {
+        font-size: 0.85rem;
+      }
+      .slide-heading {
+        font-size: 1.15rem;
+        margin-bottom: 4px;
+      }
+      .story-text {
+        font-size: 0.88rem;
+        margin-bottom: 4px;
+        line-height: 1.25;
+      }
+      .story-sound {
+        font-size: 1.1rem;
+        margin: 2px 0 6px 0;
       }
     }
   </style>
@@ -428,16 +612,132 @@
 
     <!-- Slide Canvas Frame -->
     <div id="slide-viewport" class="slide-frame" title="Toca para avanzar">
-      <img id="slide-1" class="slide-canvas active" src="assets/images/slide_01.png" alt="1. Portada">
-      <img id="slide-2" class="slide-canvas" src="assets/images/slide_02.png" alt="2. La cueva grande">
-      <img id="slide-3" class="slide-canvas" src="assets/images/slide_03.png" alt="3. Mañana tibia">
-      <img id="slide-4" class="slide-canvas" src="assets/images/slide_04.png" alt="4. Tito ríe">
-      <img id="slide-5" class="slide-canvas" src="assets/images/slide_05.png" alt="5. El portazo">
-      <img id="slide-6" class="slide-canvas" src="assets/images/slide_06.png" alt="6. El corazón asustado">
-      <img id="slide-7" class="slide-canvas" src="assets/images/slide_07.png" alt="7. Mamá abraza">
-      <img id="slide-8" class="slide-canvas" src="assets/images/slide_08.png" alt="8. Tristeza en la pancita">
-      <img id="slide-9" class="slide-canvas" src="assets/images/slide_09.png" alt="9. Osa Rosa acompaña">
-      <img id="slide-10" class="slide-canvas" src="assets/images/slide_10.png" alt="10. Todo está bien">
+
+      <!-- SLIDE 1: PORTADA -->
+      <div id="slide-1" class="slide-canvas active">
+        <video class="bg-video" autoplay loop muted playsinline preload="auto">
+          <source src="assets/videos/video_01.mp4" type="video/mp4">
+        </video>
+        <div class="story-overlay overlay-left">
+          <h1 class="story-title">Tito y los<br>cambios<br>de la cueva</h1>
+          <p class="story-subtitle">Cuentos para sentir • 0 a 3 años</p>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: LA CUEVA GRANDE -->
+      <div id="slide-2" class="slide-canvas">
+        <video class="bg-video" loop muted playsinline preload="auto">
+          <source src="assets/videos/video_02.mp4" type="video/mp4">
+        </video>
+        <div class="story-overlay overlay-left frosted-card">
+          <h2 class="slide-heading">La cueva grande de Tito</h2>
+          <p class="story-text"><strong>En una cueva grande, grande, vive un osito.</strong></p>
+          <p class="story-text">Se llama Tito. Tito vive con su mamá y con otros ositos.</p>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: MAÑANA TIBIA -->
+      <div id="slide-3" class="slide-canvas">
+        <video class="bg-video" loop muted playsinline preload="auto">
+          <source src="assets/videos/video_03.mp4" type="video/mp4">
+        </video>
+        <div class="story-overlay overlay-left-top">
+          <p class="story-text"><strong>Una mañana, entra una luz tibia y cálida.</strong></p>
+          <p class="story-text">Mamá Osa lo acarició y le cantó bajito:</p>
+          <p class="story-sound sound-ochre">«Buenos días, Tito»</p>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: TITO RÍE -->
+      <div id="slide-4" class="slide-canvas">
+        <video class="bg-video" loop muted playsinline preload="auto">
+          <source src="assets/videos/video_04.mp4" type="video/mp4">
+        </video>
+        <div class="story-overlay overlay-left">
+          <h2 class="slide-heading">Tito sonríe.</h2>
+          <p class="story-sound sound-coral">¿Cómo está Tito? ¡Está alegre!</p>
+          <p class="story-text">Tito está feliz. La alegría sube por las patitas, hace cosquillas y sale como risita:</p>
+          <p class="story-sound sound-green">«¡ji, ji, ji!»</p>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: EL PORTAZO (Texto colocado arriba a la derecha para no tapar a Tito ni a la puerta) -->
+      <div id="slide-5" class="slide-canvas">
+        <video class="bg-video" loop muted playsinline preload="auto">
+          <source src="assets/videos/video_05.mp4" type="video/mp4">
+        </video>
+        <div class="story-overlay overlay-right-top frosted-card-compact">
+          <p class="story-text">De repente...</p>
+          <p class="story-sound sound-coral sound-huge">¡CLANC, CLANC!</p>
+          <p class="story-text"><strong>Suena la puerta grande de la cueva.</strong></p>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: EL SUSTO -->
+      <div id="slide-6" class="slide-canvas">
+        <video class="bg-video" loop muted playsinline preload="auto">
+          <source src="assets/videos/video_06.mp4" type="video/mp4">
+        </video>
+        <div class="story-overlay overlay-left">
+          <p class="story-text"><strong>Tito se sorprendió y abrió grande los ojos.</strong></p>
+          <p class="story-text">Se tapó las orejitas y su corazón hacía:</p>
+          <p class="story-sound sound-coral sound-huge">¡PUM, PUM, PUM!</p>
+          <p class="story-text">¿Qué le pasó a Tito?</p>
+          <p class="story-sound sound-coral">¡Tito se asustó!</p>
+        </div>
+      </div>
+
+      <!-- SLIDE 7: EL ABRAZO -->
+      <div id="slide-7" class="slide-canvas">
+        <video class="bg-video" loop muted playsinline preload="auto">
+          <source src="assets/videos/video_07.mp4" type="video/mp4">
+        </video>
+        <div class="story-overlay overlay-left">
+          <h2 class="slide-heading">Mamá Osa lo abrazó fuerte.</h2>
+          <p class="story-text">«Tito, te asustaste. La puerta sonó muy fuerte. Aquí estoy».</p>
+          <p class="story-sound sound-ochre">«Aquí estoy»</p>
+          <p class="story-text"><strong>Poco a poco, el PUM, PUM se hizo más lento.</strong></p>
+        </div>
+      </div>
+
+      <!-- SLIDE 8: LA DESPEDIDA DE LOLO -->
+      <div id="slide-8" class="slide-canvas">
+        <video class="bg-video" loop muted playsinline preload="auto">
+          <source src="assets/videos/video_08.mp4" type="video/mp4">
+        </video>
+        <div class="story-overlay overlay-left frosted-card">
+          <p class="story-text"><strong>Más tarde, Lolo, el osito grande, se despide. Lolo sale de la cueva.</strong></p>
+          <p class="story-text">Ya no estaba su amigo.<br><br>Tito sintió algo apretadito en la pancita.</p>
+          <p class="story-text">¿Qué siente Tito?</p>
+          <p class="story-sound sound-blue">¡Tito está triste!</p>
+        </div>
+      </div>
+
+      <!-- SLIDE 9: OSA ROSA ACOMPAÑA -->
+      <div id="slide-9" class="slide-canvas">
+        <video class="bg-video" loop muted playsinline preload="auto">
+          <source src="assets/videos/video_09.mp4" type="video/mp4">
+        </video>
+        <div class="story-overlay overlay-left frosted-card">
+          <h2 class="slide-heading">Osa Rosa se sentó junto a Tito.</h2>
+          <p class="story-text">«Estás triste porque Lolo se fue. Está bien sentirte así. Yo estoy contigo».</p>
+          <p class="story-sound sound-ochre">«Yo estoy contigo»</p>
+          <p class="story-text">Tito se apoyó en ella y la tristeza se fue haciendo más pequeñita.</p>
+        </div>
+      </div>
+
+      <!-- SLIDE 10: TODO ESTÁ BIEN -->
+      <div id="slide-10" class="slide-canvas">
+        <video class="bg-video" loop muted playsinline preload="auto">
+          <source src="assets/videos/video_10.mp4" type="video/mp4">
+        </video>
+        <div class="story-overlay overlay-left frosted-card">
+          <h2 class="slide-heading">Al final del día, Tito sabe algo nuevo:</h2>
+          <p class="story-text">cuando la cueva cambia, Tito siente. Y lo que siente tiene nombre: alegría, susto y tristeza.<br><br>Osa Rosada lo abraza, y todo está bien.</p>
+          <p class="story-sound sound-coral sound-huge">«¡Y todo está bien!»</p>
+        </div>
+      </div>
+
     </div>
 
     <!-- Right Navigation Arrow -->
@@ -528,14 +828,22 @@
       if (page > totalPages) page = totalPages;
       currentPage = page;
 
-      // Update active slide image
+      // Update active slide container & manage video playback
       for (let i = 1; i <= totalPages; i++) {
         const el = document.getElementById(`slide-${i}`);
         if (el) {
+          const vid = el.querySelector('video');
           if (i === currentPage) {
             el.classList.add('active');
+            if (vid) {
+              vid.currentTime = 0;
+              vid.play().catch(e => console.log('Video autoplay:', e));
+            }
           } else {
             el.classList.remove('active');
+            if (vid) {
+              vid.pause();
+            }
           }
         }
       }
@@ -656,11 +964,11 @@
       unlockAudio();
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(392, audioCtx.currentTime);
-      osc.frequency.linearRampToValueAtTime(329.63, audioCtx.currentTime + 1.2);
-      gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
-      gain.gain.linearRampToValueAtTime(0.18, audioCtx.currentTime + 0.4);
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(160, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 1.2);
+      gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.25, audioCtx.currentTime + 0.5);
       gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.6);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
@@ -671,55 +979,45 @@
 
     function playCalmChime() {
       unlockAudio();
-      const notes = [659.25, 783.99, 987.77, 1318.51];
+      const notes = [523.25, 659.25, 783.99, 1046.50];
       notes.forEach((freq, idx) => {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.type = 'sine';
         osc.frequency.value = freq;
-        const start = audioCtx.currentTime + (idx * 0.15);
-        gain.gain.setValueAtTime(0, start);
-        gain.gain.linearRampToValueAtTime(0.25, start + 0.03);
-        gain.gain.exponentialRampToValueAtTime(0.001, start + 1.4);
+        const startTime = audioCtx.currentTime + idx * 0.15;
+        gain.gain.setValueAtTime(0.001, startTime);
+        gain.gain.linearRampToValueAtTime(0.2, startTime + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 1.4);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
-        osc.start(start);
-        osc.stop(start + 1.5);
+        osc.start(startTime);
+        osc.stop(startTime + 1.5);
       });
       triggerRipple();
     }
 
     function playCelebration() {
       unlockAudio();
-      const chord = [523.25, 659.25, 783.99, 1046.50];
-      chord.forEach((freq, idx) => {
+      const chords = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+      chords.forEach((freq, idx) => {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        osc.type = 'triangle';
+        osc.type = 'sine';
         osc.frequency.value = freq;
-        const start = audioCtx.currentTime + (idx * 0.1);
-        gain.gain.setValueAtTime(0, start);
-        gain.gain.linearRampToValueAtTime(0.28, start + 0.05);
-        gain.gain.exponentialRampToValueAtTime(0.001, start + 2.0);
+        const startTime = audioCtx.currentTime + idx * 0.08;
+        gain.gain.setValueAtTime(0.001, startTime);
+        gain.gain.linearRampToValueAtTime(0.18, startTime + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 2.0);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
-        osc.start(start);
-        osc.stop(start + 2.1);
+        osc.start(startTime);
+        osc.stop(startTime + 2.1);
       });
       triggerRipple();
     }
 
-    // Page tap interaction: Tap right half to go forward, tap left half to go back
-    slideViewport.addEventListener('click', (e) => {
-      const rect = slideViewport.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      if (clickX > rect.width * 0.4) {
-        if (currentPage < totalPages) goToPage(currentPage + 1);
-      } else {
-        if (currentPage > 1) goToPage(currentPage - 1);
-      }
-    });
-
+    // Touch, Click and Keyboard Events
     btnPrev.addEventListener('click', (e) => {
       e.stopPropagation();
       goToPage(currentPage - 1);
@@ -730,79 +1028,96 @@
       goToPage(currentPage + 1);
     });
 
-    // Minimal dots click
-    dots.forEach(dot => {
-      dot.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const p = parseInt(dot.getAttribute('data-page'));
-        goToPage(p);
-      });
-    });
-
-    // Keyboard support
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
-        if (currentPage < totalPages) goToPage(currentPage + 1);
-      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
-        if (currentPage > 1) goToPage(currentPage - 1);
-      } else if (e.key === 'm' || e.key === 'M') {
-        toggleMusic();
-      } else if (e.key === 'f' || e.key === 'F') {
-        btnFullscreen.click();
-      }
-    });
-
-    // Touch swipe support
-    let touchStartX = 0;
-    slideViewport.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    slideViewport.addEventListener('touchend', (e) => {
-      const diffX = e.changedTouches[0].screenX - touchStartX;
-      if (diffX < -45 && currentPage < totalPages) {
-        goToPage(currentPage + 1);
-      } else if (diffX > 45 && currentPage > 1) {
-        goToPage(currentPage - 1);
-      }
-    }, { passive: true });
-
-    // Fullscreen support
-    btnFullscreen.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
-      } else {
-        if (document.exitFullscreen) document.exitFullscreen();
-      }
-    });
-
-    // Autoplay Music Trigger:
-    // 1. Inmediato apenas se abre la página
-    window.addEventListener('DOMContentLoaded', () => {
-      startBackgroundMusic();
-    });
-
-    // 2. Desbloqueo transparente al primer toque/clic en cualquier parte de la pantalla
-    function unlockAudioOnFirstInteraction() {
+    slideViewport.addEventListener('click', (e) => {
       if (audioBgm.paused) {
         startBackgroundMusic();
       }
-      window.removeEventListener('pointerdown', unlockAudioOnFirstInteraction);
-      window.removeEventListener('touchstart', unlockAudioOnFirstInteraction);
-      window.removeEventListener('click', unlockAudioOnFirstInteraction);
-      window.removeEventListener('keydown', unlockAudioOnFirstInteraction);
+      const rect = slideViewport.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      if (clickX > rect.width * 0.65) {
+        goToPage(currentPage + 1);
+      } else if (clickX < rect.width * 0.35) {
+        goToPage(currentPage - 1);
+      } else {
+        goToPage(currentPage + 1);
+      }
+    });
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const page = parseInt(dot.getAttribute('data-page'));
+        goToPage(page);
+      });
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        goToPage(currentPage + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        goToPage(currentPage - 1);
+      } else if (e.key === 'm' || e.key === 'M') {
+        toggleMusic();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      }
+    });
+
+    // Touch Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    slideViewport.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      if (audioBgm.paused) {
+        startBackgroundMusic();
+      }
+    }, { passive: true });
+
+    slideViewport.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const diff = touchEndX - touchStartX;
+      if (diff < -45) {
+        goToPage(currentPage + 1);
+      } else if (diff > 45) {
+        goToPage(currentPage - 1);
+      }
     }
 
-    window.addEventListener('pointerdown', unlockAudioOnFirstInteraction, { passive: true });
-    window.addEventListener('touchstart', unlockAudioOnFirstInteraction, { passive: true });
-    window.addEventListener('click', unlockAudioOnFirstInteraction, { passive: true });
-    window.addEventListener('keydown', unlockAudioOnFirstInteraction, { passive: true });
+    // Fullscreen Toggle
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.log(`Fullscreen error: ${err.message}`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
 
-    // Initial query param or start on page 1
-    const urlParams = new URLSearchParams(window.location.search);
-    const initialPage = parseInt(urlParams.get('page')) || 1;
-    goToPage(initialPage);
+    btnFullscreen.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleFullscreen();
+    });
+
+    // Initial setup
+    window.addEventListener('DOMContentLoaded', () => {
+      goToPage(1);
+      const triggerStart = () => {
+        if (audioBgm.paused) {
+          startBackgroundMusic();
+        }
+        window.removeEventListener('click', triggerStart);
+        window.removeEventListener('touchstart', triggerStart);
+      };
+      window.addEventListener('click', triggerStart);
+      window.addEventListener('touchstart', triggerStart);
+    });
   </script>
 </body>
 </html>
